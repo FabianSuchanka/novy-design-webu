@@ -138,25 +138,16 @@ header{position:sticky;top:0;width:100%;background:#fff;z-index:999;box-shadow:0
 .hero-content p {font-size:1.05rem;color:#4B5563;margin-bottom:24px;}
 .hero-btn {background:#2C5F2D;color:#fff;padding:12px 28px;border-radius:32px;font-weight:600;text-decoration:none;transition: transform .22s, box-shadow .22s;}
 .hero-btn:hover {transform:translateY(-4px) scale(1.03);box-shadow:0 12px 28px rgba(44,95,45,0.28);}
-.hero-illustration svg {max-width:180px;height:auto}
 
-/* Nový styl pro obrázek v hero sekci */
+/* Styl pro SVG ilustraci v hero sekci */
 .hero-illustration {
-  /* Zajistí, že se SVG vycentruje a dýchá */
   display: flex;
   align-items: center;
   justify-content: center;
-  min-width: 240px; /* Minimální šířka pro SVG */
+  min-width: 240px; 
 }
+.hero-illustration svg {max-width:240px;height:auto} /* Nastavení velikosti SVG */
 
-/* Upravte i media query pro mobil */
-@media (max-width: 480px) {
-  .hero-illustration svg {
-    width: 100%;
-    max-width: 200px; /* Zmenšíme na mobilu */
-    height: auto;
-  }
-}
 
 /* ========== sections ========== */
 section{padding:72px 24px}
@@ -165,11 +156,7 @@ section{padding:72px 24px}
 .benefit-card{background:#fff;border-radius:32px;padding:24px;text-align:center;box-shadow:0 8px 18px rgba(0,0,0,0.08);transition:transform .3s,box-shadow .3s}
 .benefit-card:hover{transform:translateY(-8px);box-shadow:0 20px 40px rgba(0,0,0,0.12)}
 
-/* ========== Nová sekce Tech Logos ========== */
-#tech-logos img:hover {
-  opacity: 1;
-  filter: grayscale(0%);
-}
+/* Styly pro #tech-logos byly ODSTRANĚNY */
 
 /* ========== projects ========== */
 .projects-section {
@@ -519,7 +506,7 @@ footer {
   margin: 0 auto;
   padding: 0 24px;
   display: grid;
-  grid-template-columns: 2fr 1fr 1.5fr; /* Rozložení sloupců */
+  grid-template-columns: 2fr 1.5fr; /* Změna na 2 sloupce */
   gap: 40px;
 }
 .footer-col h4 {
@@ -568,16 +555,38 @@ footer {
   border-top: 1px solid #E5E7EB;
   font-size: 0.9rem;
 }
-@media (max-width: 768px) {
-  .footer-container {
-    grid-template-columns: 1fr; /* Sloupce pod sebou */
-    gap: 30px;
-  }
-  .footer-col.footer-about p {
-    max-width: none;
-  }
+
+/* Nové styly pro loga technologií v patičce */
+.footer-tech-stack {
+  display: flex;
+  flex-direction: row; /* ZMĚNA: Horizontální řazení */
+  flex-wrap: wrap; /* Přidáno: Zalamování na mobilech */
+  gap: 24px; /* ZMĚNA: Větší mezera pro horizontální layout */
+  margin-top: 16px;
+  align-items: center; /* ZMĚNA: Vertikální centrování */
 }
 
+.tech-logo {
+  display: inline-flex; 
+  align-items: center;
+  opacity: 0.7;
+  transition: opacity 0.2s;
+}
+
+.tech-logo:hover {
+  opacity: 1;
+}
+
+.tech-logo img {
+  height: 32px; /* Jednotná výška log */
+  width: auto;
+  filter: grayscale(100%); 
+  transition: filter 0.2s;
+}
+
+.tech-logo:hover img {
+  filter: grayscale(0%); 
+}
 /* ========== responsive tweaks ========== */
 
 /* Tablet landscape */
@@ -629,6 +638,15 @@ footer {
   
   /* Header button adjustments */
   .header-btn{padding:8px 16px;font-size:0.9rem}
+
+  /* Responsive patička (už tam byl) */
+  .footer-container {
+    grid-template-columns: 1fr; /* Sloupce pod sebou */
+    gap: 30px;
+  }
+  .footer-col.footer-about p {
+    max-width: none;
+  }
 }
 
 /* Mobile portrait */
@@ -647,7 +665,7 @@ footer {
   .hero-content h1{font-size:1.6rem;line-height:1.3}
   .hero-content p{font-size:0.95rem;margin-bottom:20px}
   .hero-btn{padding:12px 28px;font-size:0.95rem}
-  .hero-illustration img{max-width:200px} /* Úprava pro img */
+  .hero-illustration svg{max-width:200px} /* Zmenšení SVG na mobilu */
   
   /* Sections */
   section{padding:40px 12px}
