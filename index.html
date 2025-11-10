@@ -32,6 +32,7 @@
 
   <header>
     <div class="container header-inner">
+      
       <div class="logo" id="logo" role="button" tabindex="0">
         <img src="assets/logos/logosspecs.png" alt="SpecifAI logo" class="logo-icon">
         SpecifAI
@@ -42,7 +43,6 @@
           <li><a href="#services">Služby</a></li>
           <li><a href="#projects">Projekty</a></li>
           <li><a href="#about">O nás</a></li>
-          <li><a href="#testimonials">Reference</a></li>
           <li><a href="#contact">Kontakt</a></li>
         </ul>
       </nav>
@@ -55,45 +55,46 @@
           <span></span>
         </button>
       </div>
+      
     </div>
   </header>
 
   <section class="hero">
-  <div class="hero-card">
-    <div class="hero-content">
-      <h1>Automatizace, která šetří váš čas a peníze</h1>
-      <p>Chytrá řešení pro vaši firmu – s AI i bez AI. Uvolněte své týmy, nechte rutinu na nás.</p>
-      <a href="#services" class="hero-btn">Zjistit víc</a>
+    <div class="hero-card">
+      <div class="hero-content">
+        <h1>Automatizace, která šetří váš čas a peníze</h1>
+        <p>Chytrá řešení pro vaši firmu – s AI i bez AI. Uvolněte své týmy, nechte rutinu na nás.</p>
+        <a href="#services" class="hero-btn">Zjistit víc</a>
+      </div>
+      <div class="hero-illustration">
+        <svg width="240" height="180" viewBox="0 0 240 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+              <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#000000" flood-opacity="0.08"/>
+            </filter>
+            <filter id="shadow-light" x="-20%" y="-20%" width="140%" height="140%">
+              <feDropShadow dx="0" dy="4" stdDeviation="8" flood-color="#000000" flood-opacity="0.06"/>
+            </filter>
+          </defs>
+          
+          <rect x="30" y="60" width="180" height="100" rx="16" fill="#FFFFFF" stroke="#E5E7EB" stroke-width="2" transform="rotate(-5 120 110)" filter="url(#shadow-light)" />
+          
+          <rect x="30" y="40" width="180" height="100" rx="16" fill="#F3F9F5" stroke="#CDE3D3" stroke-width="1.5" transform="rotate(2 120 90)" filter="url(#shadow)" />
+          
+          <rect x="30" y="20" width="180" height="100" rx="16" fill="#FFFFFF" stroke="#2C5F2D" stroke-width="2.5">
+            <path d="M108 60L116 68L132 52" stroke="#2C5F2D" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+          </rect>
+        </svg>
+      </div>
     </div>
-    <div class="hero-illustration">
-      <svg width="240" height="180" viewBox="0 0 240 180" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
-            <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#000000" flood-opacity="0.08"/>
-          </filter>
-          <filter id="shadow-light" x="-20%" y="-20%" width="140%" height="140%">
-            <feDropShadow dx="0" dy="4" stdDeviation="8" flood-color="#000000" flood-opacity="0.06"/>
-          </filter>
-        </defs>
-        
-        <rect x="30" y="60" width="180" height="100" rx="16" fill="#FFFFFF" stroke="#E5E7EB" stroke-width="2" transform="rotate(-5 120 110)" filter="url(#shadow-light)" />
-        
-        <rect x="30" y="40" width="180" height="100" rx="16" fill="#F3F9F5" stroke="#CDE3D3" stroke-width="1.5" transform="rotate(2 120 90)" filter="url(#shadow)" />
-        
-        <rect x="30" y="20" width="180" height="100" rx="16" fill="#FFFFFF" stroke="#2C5F2D" stroke-width="2.5">
-          <path d="M108 60L116 68L132 52" stroke="#2C5F2D" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-        </rect>
-      </svg>
-    </div>
-  </div>
-</section>
+  </section>
 
   <section id="services">
     <h2 class="section-title">Naše služby</h2>
     <div class="benefits">
       <div class="benefit-card" data-reveal>
         <h3>💡 Inovace</h3>
-        <p>Navrhujeme moderní a efektivní řešení přesně na míru. Každý projekt přizpůsobujeme individuálním potřebám klienta.</p>
+        <p>Navrhujeme moderní a efektivní řešení přesně na míru. Každý projekt přizůsobujeme individuálním potřebám klienta.</p>
       </div>
       <div class="benefit-card" data-reveal>
         <h3>🚀 Rychlost</h3>
@@ -107,40 +108,40 @@
   </section>
 
   <section id="projects" class="projects-section">
-  <div class="container">
-    <div class="projects-header">
-      <div>
-        <h2 class="section-title">Projekty</h2>
-      </div>
-      <div class="projects-actions">
-        <div class="filter-bar" role="tablist" aria-label="Filtry projektů">
-          <button class="filter-btn" data-filter="all" role="tab">Vše</button>
-          <button class="filter-btn" data-filter="make" role="tab">Make</button>
-          <button class="filter-btn" data-filter="ai" role="tab">AI</button>
-          <button class="filter-btn" data-filter="script" role="tab">Skript / Non-AI</button>
+    <div class="container">
+      <div class="projects-header">
+        <div>
+          <h2 class="section-title">Projekty</h2>
+        </div>
+        <div class="projects-actions">
+          <div class="filter-bar" role="tablist" aria-label="Filtry projektů">
+            <button class="filter-btn" data-filter="all" role="tab">Vše</button>
+            <button class="filter-btn" data-filter="make" role="tab">Make</button>
+            <button class="filter-btn" data-filter="ai" role="tab">AI</button>
+            <button class="filter-btn" data-filter="script" role="tab">Skript / Non-AI</button>
+          </div>
         </div>
       </div>
-    </div>
 
-    <div id="projects-empty" class="projects-empty" hidden>
-      <svg class="empty-ill" width="220" height="160" viewBox="0 0 220 160" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <rect x="8" y="30" width="204" height="104" rx="12" stroke="#CDE3D3" stroke-width="2" fill="#F8FAF8" />
-        <path d="M34 70h44" stroke="#2C5F2D" stroke-width="3" stroke-linecap="round" />
-        <path d="M34 90h120" stroke="#4B5563" stroke-width="2" stroke-linecap="round" />
-        <circle cx="160" cy="60" r="18" stroke="#2C5F2D" stroke-width="3" fill="#FFFFFF" />
-        <path d="M154 56 L166 60 L154 64" stroke="#2C5F2D" stroke-width="2" fill="none" />
-      </svg>
-      <h3>Žádné projekty zatím nejsou</h3>
-      <p class="muted">Jakmile sem přidáte případové studie, budou se tu krásně zobrazovat. Prozatím můžete nahrát vlastní.</p>
-      <div class="empty-ctas">
-        <button id="empty-add" class="btn">Přidat ukázkový projekt</button>
-        <a href="#contact" class="btn btn-link">Chci konzultaci</a>
+      <div id="projects-empty" class="projects-empty" hidden>
+        <svg class="empty-ill" width="220" height="160" viewBox="0 0 220 160" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <rect x="8" y="30" width="204" height="104" rx="12" stroke="#CDE3D3" stroke-width="2" fill="#F8FAF8" />
+          <path d="M34 70h44" stroke="#2C5F2D" stroke-width="3" stroke-linecap="round" />
+          <path d="M34 90h120" stroke="#4B5563" stroke-width="2" stroke-linecap="round" />
+          <circle cx="160" cy="60" r="18" stroke="#2C5F2D" stroke-width="3" fill="#FFFFFF" />
+          <path d="M154 56 L166 60 L154 64" stroke="#2C5F2D" stroke-width="2" fill="none" />
+        </svg>
+        <h3>Žádné projekty zatím nejsou</h3>
+        <p class="muted">Jakmile sem přidáte případové studie, budou se tu krásně zobrazovat. Prozatím můžete nahrát vlastní.</p>
+        <div class="empty-ctas">
+          <button id="empty-add" class="btn">Přidat ukázkový projekt</button>
+          <a href="#contact" class="btn btn-link">Chci konzultaci</a>
+        </div>
       </div>
-    </div>
 
-    <div id="projects-grid" class="projects-grid" aria-live="polite"></div>
-  </div>
-</section>
+      <div id="projects-grid" class="projects-grid" aria-live="polite"></div>
+    </div>
+  </section>
 
   <section id="about">
     <h2 class="section-title">O nás</h2>
@@ -160,57 +161,36 @@
     </div>
   </section>
 
-  <section id="testimonials" style="background: #fff;">
-    <h2 class="section-title">Co říkají naši klienti</h2>
-    <div class="benefits" style="max-width: 900px;">
-      <div class="benefit-card" data-reveal>
-        <p style="font-style: italic; color: #4B5563; font-size: 1.05rem; line-height: 1.7;">"Díky SpecifAI jsme ušetřili 20 hodin týdně. Jejich automatizace faktur je neuvěřitelná a tým reagoval bleskově."</p>
-        <h4 style="margin-top: 20px; color: #111827; font-weight: 600;">Jan Novák</h4>
-        <small style="color: #2C5F2D; font-weight: 500;">CEO, Firma ABC</small>
-      </div>
-      <div class="benefit-card" data-reveal>
-        <p style="font-style: italic; color: #4B5563; font-size: 1.05rem; line-height: 1.7;">"Proces nasazení byl hladký a jejich expertíza v AI nám otevřela nové možnosti. Doporučuji."</p>
-        <h4 style="margin-top: 20px; color: #111827; font-weight: 600;">Martina Dvořáková</h4>
-        <small style="color: #2C5F2D; font-weight: 500;">Provozní ředitelka, Logistika XYZ</small>
-      </div>
-    </div>
-  </section>
 
-  <div class="contact-wrapper" style="max-width: 500px; margin: 0 auto; padding-top: 72px; padding-bottom: 72px;">
-    <section id="contact" class="contact-section" style="max-width: 500px;">
+  <section id="contact">
+    <h2 class="section-title">Kontakt</h2>
+    <div class="benefits" style="max-width: 500px; margin: 0 auto;">
+      
       <form method="post" id="contact-form" action="https://formcarry.com/s/HYD0d6vGd25" class="benefit-card contact-form">
-        <h3>Kontaktujte nás</h3>
 
         <input type="text" id="name" name="name" placeholder="Vaše jméno" required>
-
         <input type="email" id="email" name="email" placeholder="vas@email.cz" required>
-
         <input type="text" id="tel" name="tel" placeholder="Tel. číslo">
-
         <textarea id="message" name="message" placeholder="Vaše zpráva" required></textarea>
 
         <div class="form-row" style="display: flex; align-items: center; justify-content: space-between; width: 100%; margin-top: 8px;">
           <div class="checkbox-wrap" style="display: flex; align-items: center; font-size: 0.92rem; gap: 6px; margin: 0;">
-            <input type="checkbox" id="consent" name="consent" required style="width: 16px; height: 16px;">
-            <label for="consent" style="margin: 0; font-size: 0.92rem;">Souhlasím se zpracováním údajů</label>
+            <input type="checkbox" id="consent" name="consent" required>
+            <label for="consent" style="margin: 0; font-size: 0.99rem;">Souhlasím se zpracováním údajů</label>
           </div>
-
           <button type="submit" class="submit-btn">Odeslat</button>
         </div>
       </form>
-    </section>
-  </div>
+      
+    </div>
+  </section>
 
-  <div class="toast" id="toast" role="status" aria-live="polite">Vaše zpráva byla úspěšně odeslána</div>
 
   <footer class="main-footer">
     <div class="footer-container">
       
       <div class="footer-col footer-about">
-        <div class="logo">
-          <img src="assets/logos/logosspecs.png" alt="SpecifAI logo" class="logo-icon">
-          SpecifAI
-        </div>
+        <h5>SPECIFAI</h5>
         <p>Chytrá řešení pro vaši firmu – s AI i bez AI. Uvolněte své týmy, nechte rutinu na nás.</p>
         
         <h4 style="margin-top: 24px; color: #111827; font-weight: 600;">Technologie</h4>
@@ -228,7 +208,7 @@
             <img src="assets/logos/make3.png" alt="Make">
           </a>
         </div>
-        </div>
+      </div>
 
       <div class="footer-col footer-contact">
         <h4>Firemní údaje</h4>
