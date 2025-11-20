@@ -1,236 +1,360 @@
 <!DOCTYPE html>
 <html lang="cs">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=5,user-scalable=yes" />
-  <meta name="description" content="Specifai - moderní řešení pro vaše podnikání.">
-  <title>SpecifAI</title>
-
-  <link rel="stylesheet" href="style.css">
-
-  <link rel="icon" type="image/png" href="assets/logos/logosspecs.png">
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
-  
-  <meta name="theme-color" content="#2C5F2D">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SpecifAI - Automatizace pro vaše podnikání</title>
+    <meta name="description" content="Automatizace procesů, AI integrace a vývoj skriptů na míru. Ušetřete čas a peníze se SpecifAI.">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Urbanist:wght@600;700;800&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="style.css">
+    
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
 </head>
 <body>
 
-  <div class="logo-shapes" id="logoShapes" aria-hidden="true">
-    <div class="logo-shape" data-src="assets/logos/googs.png" data-size="84"></div>
-    <div class="logo-shape" data-src="assets/logos/google_sheets.png" data-size="72"></div>
-    <div class="logo-shape" data-src="assets/logos/openai.png" data-size="78"></div>
-    <div class="logo-shape" data-src="assets/logos/make3.png" data-size="74"></div>
-    <div class="shape shape-a"></div>
-    <div class="shape shape-b"></div>
-    <div class="shape shape-c"></div>
-  </div>
+    <header class="navbar">
+        <div class="container navbar-inner">
+            <a href="#" class="logo">
+                <div class="logo-icon">Si</div> SpecifAI
+            </a>
+            
+            <nav class="nav-links" id="navLinks">
+                <a href="#sluzby" data-i18n="nav_services">Inovace</a>
+                <a href="#projekty" data-i18n="nav_projects">Portfolio</a>
+                <a href="#onas" data-i18n="nav_about">O nás</a>
+                <a href="#kontakt" data-i18n="nav_contact">Kontakt</a>
+            </nav>
 
-  <header>
-    <div class="container header-inner">
-      
-      <div class="logo" id="logo" role="button" tabindex="0">
-        <img src="assets/logos/logosspecs.png" alt="SpecifAI logo" class="logo-icon">
-        SpecifAI
-      </div>
+            <div class="nav-actions">
+                <button class="lang-btn" id="langBtn">EN</button> 
+                <a href="#kontakt" class="btn btn-primary btn-small nav-cta" data-i18n="btn_inquire">Poptat</a>
+                <button class="menu-toggle" id="menuToggle" aria-label="Menu">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+        </div>
+    </header>
 
-      <nav aria-label="Hlavní menu" class="main-nav">
-        <ul>
-          <li><a href="#services">Služby</a></li>
-          <li><a href="#projects">Projekty</a></li>
-          <li><a href="#about">O nás</a></li>
-          <li><a href="#contact">Kontakt</a></li>
-        </ul>
-      </nav>
+    <main>
+        <section class="hero">
+            <div class="container hero-grid">
+                <div class="hero-content">
+                    <h1 data-i18n="hero_title">Automatizace, která šetří váš čas</h1>
+                    <p class="subtext-hero" data-i18n="hero_subtitle">Uvolněte své týmy, rutinu nechte na nás. Chcete vědět, jak na to?</p>
+                    <div class="hero-buttons">
+                        <a href="#kontakt" class="btn btn-primary" data-i18n="btn_consultation">Konzultace</a>
+                        <a href="#sluzby" class="btn btn-outline" data-i18n="btn_more">Více</a>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?q=80&w=2070&auto=format&fit=crop" alt="SpecifAI Hero">
+                </div>
+            </div>
+        </section>
 
-      <div class="header-actions">
-        <button class="header-btn" id="lang-btn" aria-pressed="false">CZ/EN</button>
-        <button class="mobile-menu-toggle" id="mobile-menu-toggle" aria-label="Otevřít menu" aria-expanded="false">
-          <span></span>
-          <span></span>
-          <span></span>
-        </button>
-      </div>
-      
+        <section class="logo-strip">
+            <div class="container">
+                <p class="label text-center text-muted" data-i18n="tech_label">Technologie, kterým věříme</p>
+                <div class="logos-track">
+                    <span class="logo-item"><i class="ph ph-gear"></i> Make</span>
+                    <span class="logo-item"><i class="ph ph-robot"></i> OpenAI</span>
+                    <span class="logo-item"><i class="ph ph-cloud"></i> Google Cloud</span>
+                    <span class="logo-item"><i class="ph ph-code"></i> Python</span>
+                    <span class="logo-item"><i class="ph ph-app-window"></i> Webflow</span>
+                </div>
+            </div>
+        </section>
+
+        <section id="sluzby" class="section bg-light">
+            <div class="container">
+                <div class="section-header text-center">
+                    <p class="label text-blue" data-i18n="services_label">Inovace</p>
+                    <h2 data-i18n="services_title">Na míru šitá řešení</h2>
+                    <p class="subtext" data-i18n="services_subtext">Každý projekt je jiný. Budujeme to, co vám opravdu pomůže.</p>
+                </div>
+                <div class="grid-3">
+                    <div class="card feature-card">
+                        <div class="feature-img bg-gray">
+                            <img src="obrazky/inovace_rychlost.png" alt="Rychlost" />
+                        </div>
+                        <div class="card-body">
+                            <p class="label text-blue" data-i18n="feat_1_label">Rychlost</p>
+                            <h3 data-i18n="feat_1_title">Rychlá implementace bez zbytečných průtahů</h3>
+                            <p class="text-muted" data-i18n="feat_1_desc">Máme zkušenosti. Víme, jak to udělat efektivně a bez chyb.</p>
+                        </div>
+                    </div>
+                    <div class="card feature-card">
+                        <div class="feature-img bg-gray">
+                            <img src="obrazky/inovace_bezpecnost.png" alt="Bezpečnost" />
+                        </div>
+                        <div class="card-body">
+                            <p class="label text-orange" data-i18n="feat_2_label">Bezpečnost</p>
+                            <h3 data-i18n="feat_2_title">Spolehlivá práce s vašimi daty</h3>
+                            <p class="text-muted" data-i18n="feat_2_desc">Vaše informace jsou v bezpečí. Pracujeme podle nejpřísnějších standardů.</p>
+                        </div>
+                    </div>
+                    <div class="card feature-card">
+                        <div class="feature-img bg-gray">
+                            <img src="obrazky/inovace_kreativita.png" alt="Kreativita" />
+                        </div>
+                        <div class="card-body">
+                            <p class="label text-purple" data-i18n="feat_3_label">Kreativita</p>
+                            <h3 data-i18n="feat_3_title">Neobvyklé přístupy k běžným problémům</h3>
+                            <p class="text-muted" data-i18n="feat_3_desc">Někdy nejlepší řešení není to nejjednodušší. Hledáme to správné.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="projekty" class="section">
+            <div class="container">
+                <div class="section-header text-center">
+                    <p class="label text-purple" data-i18n="portfolio_label">Portfolio</p>
+                    <h2 data-i18n="portfolio_title">Projekty, které jsme vytvořili</h2>
+                    <p class="subtext" data-i18n="portfolio_subtext">Podívejte se, jak jsme pomohli jiným firmám ušetřit čas a peníze.</p>
+                </div>
+                
+                <div class="grid-3">
+    <div class="card project-card">
+        <div class="project-img bg-gray">
+            <img src="obrazky/projekty_faktura.png" alt="Faktury" />
+            </div>
+        <div class="card-body">
+            <h3 data-i18n="proj_1_title">Automatizace faktur</h3>
+            <p class="text-muted" data-i18n="proj_1_desc">Faktury se teď generují samy. Bez chyb, bez čekání.</p>
+            <div class="tags">
+                <span class="tag">Make</span><span class="tag" data-i18n="tag_accounting">Účetnictví</span>
+            </div>
+        </div>
     </div>
-  </header>
 
-  <section class="hero">
-    <div class="hero-card">
-      <div class="hero-content">
-        <h1>Automatizace, která šetří váš čas a peníze</h1>
-        <p>Chytrá řešení pro vaši firmu – s AI i bez AI. Uvolněte své týmy, nechte rutinu na nás.</p>
-        <a href="#services" class="hero-btn">Zjistit víc</a>
-      </div>
-      <div class="hero-illustration">
-        <svg width="240" height="180" viewBox="0 0 240 180" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
-              <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#000000" flood-opacity="0.08"/>
-            </filter>
-            <filter id="shadow-light" x="-20%" y="-20%" width="140%" height="140%">
-              <feDropShadow dx="0" dy="4" stdDeviation="8" flood-color="#000000" flood-opacity="0.06"/>
-            </filter>
-          </defs>
-          
-          <rect x="30" y="60" width="180" height="100" rx="16" fill="#FFFFFF" stroke="#E5E7EB" stroke-width="2" transform="rotate(-5 120 110)" filter="url(#shadow-light)" />
-          
-          <rect x="30" y="40" width="180" height="100" rx="16" fill="#F3F9F5" stroke="#CDE3D3" stroke-width="1.5" transform="rotate(2 120 90)" filter="url(#shadow)" />
-          
-          <rect x="30" y="20" width="180" height="100" rx="16" fill="#FFFFFF" stroke="#2C5F2D" stroke-width="2.5">
-            <path d="M108 60L116 68L132 52" stroke="#2C5F2D" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-          </rect>
-        </svg>
-      </div>
+    <div class="card project-card">
+        <div class="project-img bg-gray">
+            <img src="obrazky/projekty_mail.png" alt="E-mail" />
+            </div>
+        <div class="card-body">
+            <h3 data-i18n="proj_2_title">Třídění e-mailů AI</h3>
+            <p class="text-muted" data-i18n="proj_2_desc">Umělá inteligence teď zná rozdíl mezi důležitým a zbytečným.</p>
+            <div class="tags">
+                <span class="tag">AI</span><span class="tag">E-mail</span>
+            </div>
+        </div>
     </div>
-  </section>
 
-  <section id="services">
-    <h2 class="section-title">Naše služby</h2>
-    <div class="benefits">
-      <div class="benefit-card" data-reveal>
-        <h3>💡 Inovace</h3>
-        <p>Navrhujeme moderní a efektivní řešení přesně na míru. Každý projekt přizůsobujeme individuálním potřebám klienta.</p>
-      </div>
-      <div class="benefit-card" data-reveal>
-        <h3>🚀 Rychlost</h3>
-        <p>Implementace projektů probíhá rychle a efektivně, přičemž zachováváme vysokou kvalitu a spolehlivost řešení.</p>
-      </div>
-      <div class="benefit-card" data-reveal>
-        <h3>🔒 Bezpečnost</h3>
-        <p>Dbáme na bezpečnost a spolehlivost všech našich řešení, aby naši klienti mohli pracovat bez obav.</p>
-      </div>
+    <div class="card project-card">
+        <div class="project-img bg-gray">
+            <img src="obrazky/projekty_scraping.png" alt="Scraping" />
+            </div>
+        <div class="card-body">
+            <h3 data-i18n="proj_3_title">Scraping dat</h3>
+            <p class="text-muted" data-i18n="proj_3_desc">Data se sbírají sama. Nic se neztratí, nic se nezmešká.</p>
+            <div class="tags">
+                <span class="tag" data-i18n="tag_scripts">Skripty</span><span class="tag">Data</span>
+            </div>
+        </div>
     </div>
-  </section>
+</div>
+            </div>
+        </section>
 
-  <section id="projects" class="projects-section">
+        <section id="onas" class="section">
     <div class="container">
-      <div class="projects-header">
-        <div>
-          <h2 class="section-title">Projekty</h2>
+        <div class="section-header text-center">
+            <p class="label text-muted" data-i18n="nav_about">O nás</p>
+            <h2 data-i18n="about_title">Dva nadšenci, jeden cíl</h2>
+            <p class="subtext" data-i18n="about_subtext">
+                Nejsme korporát. Jsme mladý tým, který baví technologie a efektivita.
+            </p>
         </div>
-        <div class="projects-actions">
-          <div class="filter-bar" role="tablist" aria-label="Filtry projektů">
-            <button class="filter-btn" data-filter="all" role="tab">Vše</button>
-            <button class="filter-btn" data-filter="make" role="tab">Make</button>
-            <button class="filter-btn" data-filter="ai" role="tab">AI</button>
-            <button class="filter-btn" data-filter="script" role="tab">Skript / Non-AI</button>
-          </div>
+
+        <div class="about-content text-center" style="max-width: 800px; margin: 0 auto;">
+            <p class="text-large mb-4" data-i18n="about_desc_1">
+                SpecifAI tvoříme <strong>my dva</strong>. Máme energii, chuť pracovat a neustále se učit nové věci.
+                Svět automatizace se mění každý den a my držíme krok.
+            </p>
+            <p class="text-muted mb-6" data-i18n="about_desc_2">
+                Nehledáme složitá řešení pro složitost samotnou. Chceme jediné: <strong>ušetřit vám peníze</strong> a zbavit vás nudné práce, abyste se mohli věnovat tomu, co vás baví – stejně jako my.
+            </p>
+            
+            <div class="about-icons" style="display: flex; justify-content: center; gap: 24px; font-size: 2rem; color: var(--blue-ribbon);">
+                <i class="ph ph-student"></i>
+                <i class="ph ph-rocket-launch"></i>
+                <i class="ph ph-piggy-bank"></i>
+            </div>
         </div>
-      </div>
+    </div>
+</section>
 
-      <div id="projects-empty" class="projects-empty" hidden>
-        <svg class="empty-ill" width="220" height="160" viewBox="0 0 220 160" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <rect x="8" y="30" width="204" height="104" rx="12" stroke="#CDE3D3" stroke-width="2" fill="#F8FAF8" />
-          <path d="M34 70h44" stroke="#2C5F2D" stroke-width="3" stroke-linecap="round" />
-          <path d="M34 90h120" stroke="#4B5563" stroke-width="2" stroke-linecap="round" />
-          <circle cx="160" cy="60" r="18" stroke="#2C5F2D" stroke-width="3" fill="#FFFFFF" />
-          <path d="M154 56 L166 60 L154 64" stroke="#2C5F2D" stroke-width="2" fill="none" />
-        </svg>
-        <h3>Žádné projekty zatím nejsou</h3>
-        <p class="muted">Jakmile sem přidáte případové studie, budou se tu krásně zobrazovat. Prozatím můžete nahrát vlastní.</p>
-        <div class="empty-ctas">
-          <button id="empty-add" class="btn">Přidat ukázkový projekt</button>
-          <a href="#contact" class="btn btn-link">Chci konzultaci</a>
+        <section id="kontakt" class="section">
+            <div class="container contact-layout">
+                
+                <div class="contact-info">
+                    <p class="label text-main" data-i18n="contact_label">Kontakt</p>
+                    <h2 data-i18n="contact_title">Pojďme spolu</h2>
+                    <p class="text-muted mb-6" data-i18n="contact_subtext">Máte otázku? Chcete vědět víc? Ozvěte se nám. Odpovíme rychle.</p>
+                    
+                    <div class="info-list">
+                        <div class="info-item">
+                            <i class="ph ph-envelope-simple"></i>
+                            <div>
+                                <strong data-i18n="email_label">E-mail</strong>
+                                <a href="mailto:info@specifai.cz" class="d-block underline-link">kontakt@specifai.cz</a>
+                            </div>
+                        </div>
+                        <div class="info-item">
+                            <i class="ph ph-map-pin"></i>
+                            <div>
+                                <strong data-i18n="office_label">Kancelář</strong>
+                                <p class="text-muted m-0">Brno 602 00</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="contact-form-container">
+                    <h3 class="mb-4" data-i18n="form_title">Napište nám</h3>
+                    <form class="contact-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="fname" data-i18n="label_fname">Jméno</label>
+                                <input type="text" id="fname" placeholder="Jan" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="lname" data-i18n="label_lname">Příjmení</label>
+                                <input type="text" id="lname" placeholder="Novák" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="email" data-i18n="label_email">E-mail</label>
+                                <input type="email" id="email" placeholder="jan@firma.cz" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="phone" data-i18n="label_phone">Telefonní číslo</label>
+                                <input type="tel" id="phone" placeholder="+420 777 123 456">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="topic" data-i18n="label_topic">Vyberte téma</label>
+                            <div class="select-wrapper">
+                                <select id="topic" required>
+                                    <option value="" disabled selected data-i18n="opt_select">Zvolte...</option>
+                                    <option value="Poptávka" data-i18n="opt_inquiry">Poptávka</option>
+                                    <option value="Konzultace" data-i18n="opt_consultation">Konzultace</option>
+                                    <option value="Kariéra" data-i18n="opt_career">Kariéra</option>
+                                    <option value="Jiné" data-i18n="opt_other">Jiné</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+    <label for="company-type" data-i18n="label_company_type">Jaký jste typ firmy?</label>
+    <div class="select-wrapper">
+        <select id="company-type" required>
+            <option value="" disabled selected data-i18n="opt_select">Zvolte...</option>
+            <option value="Malá firma" data-i18n="company_small">Malá firma</option>
+            <option value="Střední podnik" data-i18n="company_medium">Střední podnik</option>
+            <option value="Velká korporace" data-i18n="company_corp">Velká korporace</option>
+            <option value="Startup" data-i18n="company_startup">Startup</option>
+            <option value="Neziskovka" data-i18n="company_nonprofit">Neziskovka</option>
+            <option value="Jiné" data-i18n="company_other">Jiné</option>
+        </select>
+    </div>
+</div>
+
+                        <div class="form-group">
+                            <label for="msg" data-i18n="label_msg">Zpráva</label>
+                            <textarea id="msg" rows="4" placeholder="Napište nám..."></textarea>
+                        </div>
+
+                        <div class="form-group checkbox-item">
+                            <input type="checkbox" id="consent" required>
+                            <label for="consent" data-i18n="label_consent">Souhlasím se zpracováním údajů</label>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary full-width" data-i18n="btn_send">Odeslat</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <div class="container footer-content">
+            <div class="footer-grid">
+                
+                <div class="footer-col brand-col">
+                    <a href="#" class="logo mb-4">
+                        <div class="logo-icon">Si</div> SpecifAI
+                    </a>
+                    <p class="text-small text-muted" data-i18n="footer_desc">
+                        Pomáháme firmám růst pomocí chytré automatizace a umělé inteligence. Uvolněte ruce svému týmu.
+                    </p>
+                    <div class="socials mt-4">
+                        <a href="#" aria-label="LinkedIn"><i class="ph ph-linkedin-logo"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="ph ph-x-logo"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="ph ph-instagram-logo"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-col">
+                    <h5 data-i18n="footer_nav">Navigace</h5>
+                    <ul class="footer-links-list">
+                        <li><a href="#sluzby" data-i18n="nav_services">Inovace</a></li>
+                        <li><a href="#projekty" data-i18n="nav_projects">Portfolio</a></li>
+                        <li><a href="#onas" data-i18n="nav_about">O nás</a></li>
+                        <li><a href="#kontakt" data-i18n="nav_contact">Kontakt</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h5 data-i18n="footer_contact">Kontakt</h5>
+                    <ul class="footer-contact-list">
+                        <li>
+                            <i class="ph ph-map-pin"></i>
+                            <span>Brno 602 00<span>
+                        </li>
+                        <li>
+                            <i class="ph ph-envelope-simple"></i>
+                            <a href="mailto:info@specifai.cz">kontakt@specifai.cz</a>
+                        </li>
+                        <li>
+                            <i class="ph ph-phone"></i>
+                            <a href="tel:+420724123456">+420 773 952 636</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="footer-col newsletter-col">
+                    <h5 data-i18n="footer_stay_updated">Zůstaňte v obraze</h5>
+                    <p class="text-tiny text-muted mb-4" data-i18n="footer_newsletter_text">Tipy a triky o automatizaci přímo do vašeho emailu.</p>
+                    <form class="footer-form">
+                        <div class="input-group">
+                            <input type="email" placeholder="Váš e-mail" data-i18n="placeholder_email" required>
+                            <button type="submit" class="btn-icon"><i class="ph ph-paper-plane-right"></i></button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2025 SpecifAI s.r.o. <span data-i18n="all_rights">Všechna práva vyhrazena.</span></p>
+                <div class="legal-links">
+                    <a href="#" data-i18n="privacy_policy">Zásady ochrany osobních údajů</a>
+                    <a href="#" data-i18n="terms">Obchodní podmínky</a>
+                </div>
+            </div>
         </div>
-      </div>
+    </footer>
 
-      <div id="projects-grid" class="projects-grid" aria-live="polite"></div>
-    </div>
-  </section>
-
-  <section id="about">
-    <h2 class="section-title">O nás</h2>
-    <div class="benefits">
-      <div class="benefit-card" data-reveal>
-        <h3>Expertíza v automatizacích</h3>
-        <p>Optimalizujeme procesy a vytváříme chytré automatizace, které firmám šetří čas a peníze.</p>
-      </div>
-      <div class="benefit-card" data-reveal>
-        <h3>Kreativní tým</h3>
-        <p>Naši specialisté kombinují teoretické know-how s praktickými dovednostmi, aby dodali reálné výsledky.</p>
-      </div>
-      <div class="benefit-card" data-reveal>
-        <h3>Zodpovědnost</h3>
-        <p>Pracujeme důkladně a s důrazem na bezpečnost, kvalitu a dlouhodobou hodnotu pro klienty.</p>
-      </div>
-    </div>
-  </section>
-
-
-  <section id="contact">
-    <h2 class="section-title">Kontakt</h2>
-    <div class="benefits" style="max-width: 500px; margin: 0 auto;">
-      
-      <form method="post" id="contact-form" action="https://formcarry.com/s/HYD0d6vGd25" class="benefit-card contact-form">
-
-        <input type="text" id="name" name="name" placeholder="Vaše jméno" required>
-        <input type="email" id="email" name="email" placeholder="vas@email.cz" required>
-        <input type="text" id="tel" name="tel" placeholder="Tel. číslo">
-        <textarea id="message" name="message" placeholder="Vaše zpráva" required></textarea>
-
-        <div class="form-row" style="display: flex; align-items: center; justify-content: space-between; width: 100%; margin-top: 8px;">
-          <div class="checkbox-wrap" style="display: flex; align-items: center; font-size: 0.92rem; gap: 6px; margin: 0;">
-            <input type="checkbox" id="consent" name="consent" required>
-            <label for="consent" style="margin: 0; font-size: 0.99rem;">Souhlasím se zpracováním údajů</label>
-          </div>
-          <button type="submit" class="submit-btn">Odeslat</button>
-        </div>
-      </form>
-      
-    </div>
-  </section>
-
-
-  <footer class="main-footer">
-    <div class="footer-container">
-      
-      <div class="footer-col footer-about">
-        <h5>SPECIFAI</h5>
-        <p>Chytrá řešení pro vaši firmu – s AI i bez AI. Uvolněte své týmy, nechte rutinu na nás.</p>
-        
-        <h4 style="margin-top: 24px; color: #111827; font-weight: 600;">Technologie</h4>
-        <div class="footer-tech-stack">
-          <a href="#" class="tech-logo" aria-label="Google">
-            <img src="assets/logos/googs.png" alt="Google">
-          </a>
-          <a href="#" class="tech-logo" aria-label="Google Sheets">
-            <img src="assets/logos/google_sheets.png" alt="Google Sheets">
-          </a>
-          <a href="#" class="tech-logo" aria-label="OpenAI">
-            <img src="assets/logos/openai.png" alt="OpenAI">
-          </a>
-          <a href="#" class="tech-logo" aria-label="Make">
-            <img src="assets/logos/make3.png" alt="Make">
-          </a>
-        </div>
-      </div>
-
-      <div class="footer-col footer-contact">
-        <h4>Firemní údaje</h4>
-        <p>
-          <strong>SpecifAI s.r.o.</strong><br>
-          Zatím žadná, ale v Brně<br>
-          IČO: Taky není<br>
-          DIČ: Taky není
-        </p>
-        <p>
-          <a href="mailto:kontakt@specifai.cz">kontakt@specifai.cz</a><br>
-          <a href="tel:+420773952636">+420 773 952 636</a>
-        </p>
-      </div>
-
-    </div>
-    <div class="footer-bottom">
-      &copy; 2025 SpecifAI. <a href="#">Zásady ochrany osobních údajů</a>
-    </div>
-  </footer>
-
-  <script src="script.js" defer></script>
-  <script src="project.js" defer></script>
+    <script src="script.js"></script>
 </body>
 </html>
