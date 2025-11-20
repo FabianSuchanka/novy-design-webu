@@ -1,803 +1,473 @@
-/* ========== RESET & FONT ========== */
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth;height:100%}
-body{
-  font-family:'Inter',sans-serif;
-  color: #1F2937; /* Tmavý text */
-  background: #F9FAFB; /* Světle šedé pozadí */
-  line-height:1.6;
-  overflow-x:hidden;
-  position:relative;
-  min-height:100%;
-  transition: opacity 0.5s ease;
-}
-body.fade-out { opacity: 0; }
-body.fade-in { opacity: 1; }
+/* --- VARIABLES & RESET --- */
+:root {
+    /* Style Guide Colors */
+    --blue-ribbon: #0A66FF;
+    --flush-orange: #FF7A00;
+    --purple-heart: #8E2BBE;
+    --persian-green: #00B388;
+    
+    /* Neutrals */
+    --text-main: #111827;
+    --text-muted: #6B7280;
+    --bg-body: #FFFFFF;
+    --bg-light: #F9FAFB;
+    --border-color: #E5E7EB;
+    --bg-gray-placeholder: #E5E7EB;
 
-/* ========== "AURORA" POZADÍ ========== */
-body::before {
-  content: '';
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: #F9FAFB;
-  background-image: 
-    radial-gradient(circle at 10% 0%, rgba(44, 95, 45, 0.06) 0%, transparent 40%),
-    radial-gradient(circle at 90% 100%, rgba(44, 95, 45, 0.06) 0%, transparent 40%);
-  background-repeat: no-repeat;
-  z-index: -2;
-  pointer-events: none;
-}
-.logo-shapes { display: none; }
+    /* Fonty */
+    --font-heading: 'Urbanist', sans-serif;
+    --font-body: 'Inter', sans-serif;
 
-/* ========== NOVÁ "SKLENĚNÁ" HLAVIČKA (SVĚTLÁ) ========== */
-header {
-  position: sticky;
-  top: 0;
-  width: 100%;
-  z-index: 999;
-  /* Světlý "Glassmorphism" */
-  background: rgba(255, 255, 255, 0.85);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.04);
-}
-.container{max-width:1200px;margin:0 auto;padding:0 24px}
-.header-inner{display:flex;justify-content:space-between;align-items:center;height:72px}
-
-/* ========== LOGO A TLAČÍTKA ========== */
-.logo {
-  font-weight: 600;
-  font-size: 1rem;
-  background: #2C5F2D; /* Vaše původní zelená */
-  color: #FFFFFF; /* Bílý text */
-  padding: 8px 20px;
-  border-radius: 32px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: transform .22s, box-shadow .22s;
-  gap: 10px;
-}
-.logo:hover {
-  transform: translateY(-4px) scale(1.03);
-  box-shadow: 0 12px 28px rgba(44, 95, 45, 0.2); /* Zelená záře */
-}
-.logo-icon {
-  height: 24px;
-  width: auto;
-  filter: none; /* Normální bílá ikona */
-}
-.header-actions {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-.header-btn {
-  background: #F3F4F6; /* Světle šedé tlačítko */
-  color: #1F2937; /* Tmavý text */
-  padding: 10px 24px;
-  border-radius: 32px;
-  font-weight: 600;
-  transition: all .2s;
-  border: none;
-  cursor: pointer;
-}
-.header-btn:hover {
-  background: #E5E7EB;
-  transform: translateY(-2px);
+    /* UI */
+    --radius: 8px;
+    --container: 1280px;
 }
 
-/* ========== NAVIGACE (Mobile-First OPRAVA) ========== */
+* { margin: 0; padding: 0; box-sizing: border-box; }
 
-/* 1. VÝCHOZÍ STAV (MOBILNÍ MENU - SKRYTÉ) */
-.main-nav {
-  display: block; 
-  position: fixed;
-  top: 72px; /* Výchozí pro tablet */
-  left: 0;
-  right: 0;
-  background: #FFFFFF; /* Pevná bílá (dle vašeho přání) */
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  z-index: 1000;
-  
-  /* Animační styly */
-  opacity: 0;
-  transform: translateY(-20px);
-  pointer-events: none;
-  transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+body {
+    font-family: var(--font-body);
+    background-color: var(--bg-body);
+    color: var(--text-main);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
 }
-.main-nav.mobile-open {
-  opacity: 1;
-  transform: translateY(0);
-  pointer-events: auto;
-}
-.main-nav ul {
-  flex-direction: column; /* Výchozí je mobilní */
-  gap: 0;
-  padding: 20px;
-  list-style: none;
-  margin: 0;
-}
-.main-nav ul li {
-  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-}
-.main-nav ul li:last-child {
-  border-bottom: none;
-}
-.main-nav ul li a {
-  padding: 16px 20px; 
-  display: block;
-  border-radius: 0;
-  font-size: 1.1rem; 
-  color: #111827;
-  text-decoration: none;
-  font-weight: 600;
-  transition: background 0.2s;
-}
-/* Skryjeme "Apple zoom" na mobilu */
-.main-nav ul:hover li a { opacity: 1; transform: scale(1); }
-.main-nav ul li a:hover { background: rgba(0, 0, 0, 0.04); }
-.main-nav ul li a:active { transform: scale(0.98); }
 
-
-/* 2. VÝCHOZÍ STAV (IKONA "HAMBURGERU" - ZOBRAZENÁ) */
-.mobile-menu-toggle {
-  display: flex; /* Zobrazeno na mobilu */
-  flex-direction: column;
-  justify-content: space-around;
-  width: 30px;
-  height: 30px;
-  background: #F3F4F6;
-  border-radius: 8px; 
-  border: none;
-  cursor: pointer;
-  padding: 0;
-  z-index: 1001;
-  transition: transform 0.15s ease;
+/* --- ANIMACE PŘECHODU JAZYKA --- */
+body {
+    transition: opacity 0.3s ease-in-out; 
+    opacity: 1; 
 }
-.mobile-menu-toggle:active { transform: scale(0.92); }
-.mobile-menu-toggle span {
-  width: 100%;
-  height: 3px;
-  background: #1F2937;
-  border-radius: 2px;
-  transition: all 0.3s ease-in-out; 
-  transform-origin: center;
+
+body.fade-out {
+    opacity: 0; 
 }
-.mobile-menu-toggle.active span:nth-child(1) { transform: rotate(45deg) translate(6px, 6px); }
-.mobile-menu-toggle.active span:nth-child(2) { opacity: 0; }
-.mobile-menu-toggle.active span:nth-child(3) { transform: rotate(-45deg) translate(6px, -6px); }
 
+/* --- TYPOGRAPHY --- */
+h1, h2, h3, h4, h5 {
+    font-family: var(--font-heading);
+    color: var(--text-main);
+    font-weight: 700;
+    line-height: 1.2;
+}
 
-/* 3. DESKTOP STYLY (Když je obrazovka ŠIRŠÍ než 768px) */
-@media (min-width: 769px) {
-  
-  /* Skryjeme hamburger na PC */
-  .mobile-menu-toggle {
-    display: none;
-  }
-  
-  /* Změníme mobilní menu na desktopové */
-  .main-nav {
-    /* Resetujeme všechny mobilní styly */
-    position: relative;
-    display: block;
-    top: auto;
-    background: transparent;
-    backdrop-filter: none;
-    -webkit-backdrop-filter: none;
-    box-shadow: none;
-    z-index: auto;
-    opacity: 1;
-    transform: none;
-    pointer-events: auto;
-    transition: none;
-  }
-  .main-nav ul {
+h1 { font-size: 3rem; margin-bottom: 20px; }
+h2 { font-size: 2.5rem; margin-bottom: 16px; }
+h3 { font-size: 1.5rem; margin-bottom: 12px; }
+h4 { font-size: 1.125rem; margin-bottom: 4px; }
+h5 { font-size: 1rem; margin-bottom: 16px; }
+
+.subtext-hero { font-size: 1.125rem; color: var(--text-muted); margin-bottom: 32px; }
+.subtext { font-size: 1.125rem; color: var(--text-muted); max-width: 600px; margin: 0 auto; }
+.label { font-weight: 700; font-size: 0.875rem; margin-bottom: 12px; display: block; font-family: var(--font-heading); }
+.text-muted { color: var(--text-muted); }
+.text-small { font-size: 0.875rem; }
+.text-tiny { font-size: 0.75rem; }
+.text-center { text-align: center; }
+
+/* Colors */
+.text-blue { color: var(--blue-ribbon); }
+.text-orange { color: var(--flush-orange); }
+.text-purple { color: var(--purple-heart); }
+.text-green { color: var(--persian-green); }
+.text-main { color: var(--text-main); }
+
+/* --- UTILITIES --- */
+.container { max-width: var(--container); margin: 0 auto; padding: 0 24px; }
+.section { padding: 96px 0; }
+.bg-light { background-color: var(--bg-light); }
+.d-block { display: block; }
+.mt-2 { margin-top: 8px; }
+.mt-4 { margin-top: 16px; }
+.mt-6 { margin-top: 24px; }
+.mt-8 { margin-top: 48px; }
+.mb-4 { margin-bottom: 16px; }
+.mb-6 { margin-bottom: 24px; }
+.bg-gray { background-color: var(--bg-gray-placeholder); display: flex; align-items: center; justify-content: center; }
+
+/* --- BUTTONS --- */
+.btn {
+    display: inline-flex; align-items: center; justify-content: center;
+    padding: 10px 20px; border-radius: var(--radius);
+    font-weight: 600; font-family: var(--font-body); font-size: 1rem;
+    cursor: pointer; transition: 0.2s; border: 1px solid transparent;
+    text-decoration: none;
+}
+.btn-small { padding: 8px 16px; font-size: 0.875rem; }
+.btn-primary { background-color: var(--blue-ribbon); color: white; }
+.btn-primary:hover { background-color: #0055CC; }
+.btn-outline { background: transparent; border-color: var(--border-color); color: var(--text-main); }
+.btn-outline:hover { border-color: var(--text-main); }
+.btn-black { background-color: #000; color: white; }
+.btn-black:hover { background-color: #333; }
+.btn-outline-dark { border: 1px solid var(--text-main); background: transparent; }
+
+/* --- NAVBAR --- */
+.navbar { position: fixed; top: 0; width: 100%; background: rgba(255,255,255,0.95); border-bottom: 1px solid var(--border-color); z-index: 100; height: 72px; }
+.navbar-inner { display: flex; justify-content: space-between; align-items: center; height: 100%; }
+.logo { display: flex; align-items: center; gap: 8px; font-weight: 800; font-family: var(--font-heading); font-size: 1.25rem; color: var(--text-main); text-decoration: none; }
+.logo-icon { background: var(--blue-ribbon); color: white; padding: 2px 6px; border-radius: 4px; font-size: 0.8rem; }
+.nav-links { display: flex; gap: 32px; }
+.nav-links a { color: var(--text-main); text-decoration: none; font-weight: 500; font-size: 0.95rem; }
+.nav-actions { display: flex; gap: 12px; align-items: center; }
+.lang-btn { background: none; border: 1px solid var(--border-color); padding: 6px 10px; border-radius: 4px; cursor: pointer; }
+.menu-toggle { display: none; background: none; border: none; flex-direction: column; gap: 5px; cursor: pointer; }
+.menu-toggle span { width: 24px; height: 2px; background: var(--text-main); }
+
+/* --- HERO --- */
+.hero { padding-top: 140px; padding-bottom: 80px; }
+.hero-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+.hero-buttons { display: flex; gap: 16px; }
+.hero-image img { width: 100%; height: auto; border-radius: var(--radius); }
+
+/* --- LOGOS --- */
+.logo-strip { padding: 40px 0; border-bottom: 1px solid var(--border-color); }
+.logos-track { display: flex; justify-content: center; gap: 48px; flex-wrap: wrap; font-size: 1.25rem; font-weight: 600; color: var(--text-main); }
+.logo-item { display: flex; align-items: center; gap: 8px; }
+
+/* --- GRIDS & CARDS --- */
+.grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 32px; margin-top: 48px; }
+
+.card { background: white; border: 1px solid var(--border-color); border-radius: var(--radius); overflow: hidden; transition: 0.2s; }
+.card:hover { border-color: var(--blue-ribbon); transform: translateY(-2px); box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1); }
+
+/* Feature Card */
+.feature-card { display: flex; flex-direction: column; height: 100%; }
+/* 1. Kontejner (ta šedá plocha) */
+.feature-img {
+    /* Ujistěte se, že tu máte nastavenou nějakou výšku, např. 200px */
+    height: 200px; 
+    
+    /* Tohle zajistí, že nic nebude "přečuhovat" ven */
+    overflow: hidden; 
+    
+    /* Pro jistotu vycentrování */
     display: flex;
-    flex-direction: row;
-    gap: 12px;
+    align-items: center;
     justify-content: center;
-    flex: 1;
-    padding: 0;
-  }
-  .main-nav ul li {
-    border-bottom: none;
-  }
-  
-  /* "Apple" styly pro odkazy */
-  .main-nav ul li a {
-    font-weight: 600;
-    font-size: 0.95rem;
-    padding: 10px 20px;
-    border-radius: 9999px;
-    display: inline-block;
-    color: #374151;
-    border: 1px solid transparent; 
-    transform: scale(1);
-    opacity: 1;
-    transition: all 0.25s ease-out;
-  }
-  .main-nav ul:hover li a {
-    opacity: 0.7;
-    transform: scale(0.99); 
-  }
-  .main-nav ul li a:hover, 
-  .main-nav ul li a:focus-visible {
-    color: #111827;
-    opacity: 1;
-    transform: scale(1.02); 
-    background: rgba(255, 255, 255, 0.6); 
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-    border: 1px solid rgba(255, 255, 255, 0.9);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08); 
-  }
-  .main-nav ul li a:active {
-    transform: scale(0.98); 
-    background: rgba(255, 255, 255, 0.8);
-    transition: all 0.05s ease-out; 
-  }
-}
-/* ===== KONEC OPRAVY NAVIGACE ===== */
-
-
-/* ========== HERO SEKCE ========== */
-.hero {
-  min-height: 90vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 60px 24px;
-  background: transparent;
-}
-.hero-card {
-  background: transparent;
-  border-radius: 0;
-  padding: 0;
-  max-width: 1100px;
-  width: 100%;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  align-items: center;
-  gap: 40px;
-  box-shadow: none;
-}
-.hero-card:hover { transform: none; box-shadow: none; }
-
-.hero-content { max-width: 520px; }
-.hero-content h1 {
-  font-size: 3.5rem;
-  margin-bottom: 24px;
-  line-height: 1.2;
-  color: #111827;
-  background: linear-gradient(90deg, #111827 0%, #2C5F2D 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-.hero-content p {
-  font-size: 1.1rem;
-  color: #4B5563;
-  margin-bottom: 32px;
-}
-.hero-btn {
-  background: #2C5F2D;
-  color: #FFFFFF;
-  padding: 14px 32px;
-  border-radius: 32px;
-  font-weight: 600;
-  text-decoration: none;
-  transition: all .22s;
-  box-shadow: 0 8px 24px rgba(44, 95, 45, 0.2);
-}
-.hero-btn:hover {
-  background: #1e4620;
-  transform: translateY(-4px) scale(1.03);
-  box-shadow: 0 12px 30px rgba(44, 95, 45, 0.3);
-}
-.hero-illustration {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.hero-illustration svg {
-  max-width: 300px;
-  height: auto;
 }
 
-/* ========== SEKCE A KARTY ========== */
-section{padding: 72px 24px}
-.section-title {
-  text-align: center;
-  display: block;
-  width: 100%;
-  margin: 0 auto 1rem;
-  font-size: 2.2rem;
-  color: #111827;
+/* 2. Samotný obrázek uvnitř */
+.feature-img img {
+    width: 100%;       /* Roztáhne se na celou šířku kontejneru */
+    height: 100%;      /* Roztáhne se na celou výšku kontejneru */
+    object-fit: cover; /* TOHLE JE KLÍČOVÉ: Obrázek vyplní plochu a ořízne přebytky, nedeformuje se */
+    display: block;    /* Odstraní malou mezeru pod obrázkem, kterou dělají prohlížeče */
 }
-.benefits {
-  display: grid;
-  gap: 20px;
-  grid-template-columns: repeat(auto-fit,minmax(240px,1fr));
-  max-width: 1100px;
-  margin: 0 auto;
-}
-.benefit-card {
-  background: #FFFFFF;
-  border: 1px solid rgba(0, 0, 0, 0.04);
-  border-radius: 24px;
-  padding: 24px;
-  text-align: center;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.06);
-  transition: transform .3s, box-shadow .3s, border-color .3s;
-}
-.benefit-card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 20px 40px rgba(0,0,0,0.08);
-  border-color: rgba(44, 95, 45, 0.2);
-}
-.benefit-card h3 {
-  color: #111827;
-}
-.benefit-card p {
-  color: #4B5563;
+.card-body { padding: 24px; display: flex; flex-direction: column; flex: 1; }
+.link-arrow { margin-top: auto; color: var(--text-main); text-decoration: none; font-weight: 600; display: flex; align-items: center; gap: 4px; }
+
+/* Project Card */
+.project-card { display: flex; flex-direction: column; height: 100%; }
+/* 1. Kontejner (ta šedá plocha) */
+.project-img {
+    /* Ujistěte se, že tu máte nastavenou nějakou výšku, např. 200px */
+    height: 200px; 
+    
+    /* Tohle zajistí, že nic nebude "přečuhovat" ven */
+    overflow: hidden; 
+    
+    /* Pro jistotu vycentrování */
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-/* Sekce Reference */
-#testimonials {
-  background: transparent; /* Pozadí je globální */
+/* 2. Samotný obrázek uvnitř */
+.project-img img {
+    width: 100%;       /* Roztáhne se na celou šířku kontejneru */
+    height: 100%;      /* Roztáhne se na celou výšku kontejneru */
+    object-fit: cover; /* TOHLE JE KLÍČOVÉ: Obrázek vyplní plochu a ořízne přebytky, nedeformuje se */
+    display: block;    /* Odstraní malou mezeru pod obrázkem, kterou dělají prohlížeče */
 }
-#testimonials .benefit-card {
-  background: #F9FAFB; /* Karty uvnitř jsou lehce šedé */
-  border-color: transparent;
-  text-align: left; /* Text referencí vlevo */
-}
-#testimonials .benefit-card:hover {
-  border-color: rgba(44, 95, 45, 0.2);
-}
+.tags { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 16px; }
+.tag { background: var(--bg-light); padding: 4px 8px; border-radius: 4px; font-size: 0.75rem; font-weight: 500; border: 1px solid var(--border-color); }
 
-/* ========== PROJEKTY ========== */
-.projects-section {
-  padding: 72px 24px;
-  background: transparent;
-}
-.projects-header {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  gap: 16px;
-  margin-bottom: 32px;
-}
-.projects-actions {
-  display: flex;
-  justify-content: center;
-  gap: 12px;
-  flex-wrap: wrap;
-  width: 100%;
-}
-.filter-bar { display: inline-flex; gap: 10px; align-items: center; flex-wrap: wrap; justify-content: center; }
-.filter-bar .filter-btn {
-  background: transparent;
-  border: 1.5px solid #D1D5DB;
-  color: #4B5563;
-  border-radius: 9999px;
-  padding: 8px 18px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.25s;
-}
-.filter-bar .filter-btn:hover {
-  color: #111827;
-  border-color: #2C5F2D;
-  background: rgba(44, 95, 45, 0.05);
-}
-.filter-bar .filter-btn.active,
-.filter-bar .filter-btn[aria-selected="true"] {
-  background: #2C5F2D;
-  color: #FFFFFF;
-  border-color: #2C5F2D;
-  box-shadow: 0 8px 20px rgba(44, 95, 45, 0.15);
-  transform: translateY(-2px);
-}
-.projects-empty {
-  max-width: 720px;
-  margin: 20px auto 0;
-  text-align: center;
-  padding: 36px;
-  border-radius: 20px;
-  background: #FFFFFF;
-  box-shadow: 0 8px 28px rgba(0,0,0,0.06);
-  border: 1px solid rgba(0, 0, 0, 0.04);
-}
-.projects-empty h3 { color: #111827; }
-.projects-empty .muted { color: #6B7280; }
-.projects-empty .empty-ill rect { fill: #FFFFFF; stroke: #E5E7EB; }
-.projects-empty .empty-ill path, .projects-empty .empty-ill circle { stroke: #2C5F2D; }
-.projects-empty .empty-ctas { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
-.projects-empty .btn-link {
-  color: #2C5F2D;
-  text-decoration: none;
-  font-weight: 600;
-  background: transparent;
-  border: none;
-}
-.projects-empty .btn-link:hover {
-  color: #1e4620;
-  text-decoration: underline;
-}
+/* Team Card */
+.team-grid { row-gap: 48px; }
+.team-card { text-align: center; background: transparent; border: none; box-shadow: none; }
+.team-card:hover { transform: none; box-shadow: none; } 
+.avatar-large { width: 100%; aspect-ratio: 1/1; margin-bottom: 16px; }
+.social-icons { display: flex; justify-content: center; gap: 12px; margin-top: 12px; font-size: 1.25rem; }
+.social-icons a { color: var(--text-main); }
 
-/* Grid projektů */
-.projects-grid {
-  display: grid;
-  gap: 18px;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  margin-top: 24px;
-}
-.project-card {
-  background: #FFFFFF;
-  border: 1px solid rgba(0, 0, 0, 0.04);
-  border-radius: 16px;
-  padding: 18px;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.06);
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  transition: transform .22s, box-shadow .22s, border-color .22s;
-}
-.project-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 16px 36px rgba(0,0,0,0.08);
-  border-color: rgba(44, 95, 45, 0.2);
-}
-.project-thumb {
-  height: 160px;
-  border-radius: 12px;
-  background: #F3F9F5;
-  overflow: hidden;
-}
-.project-thumb img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.3s ease-out;
-}
-.project-card:hover .project-thumb img { transform: scale(1.05); }
-.project-meta { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
-.project-title { font-size: 1.05rem; font-weight: 700; color: #111827; }
-.project-desc { color: #4B5563; font-size: 0.95rem; }
-.chip {
-  background: #F3F9F5;
-  color: #166534;
-  padding: 6px 10px;
-  border-radius: 9999px;
-  font-size: 0.85rem;
-  font-weight: 500;
-}
-.project-footer { display: flex; justify-content: space-between; align-items: center; margin-top: auto; }
-.project-card .btn {
-  padding: 8px 14px;
-  border-radius: 9999px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all .18s;
-  box-shadow: none;
-}
-.project-card .btn-ghost {
-  background: transparent;
-  border: 1px solid #D1D5DB;
-  color: #374151;
-}
-.project-card .btn-ghost:hover {
-  background: rgba(0, 0, 0, 0.03);
-  border-color: #4B5563;
-  color: #111827;
-}
+/* Review Card */
+.review-card { padding: 32px; }
+.active-review { border-color: var(--blue-ribbon); border-width: 2px; }
+.avatar-small { width: 48px; height: 48px; border-radius: 50%; }
+.author-row { display: flex; align-items: center; gap: 12px; }
 
-/* ========== KONTAKT A PATIČKA ========== */
-/* Wrapper (již není potřeba) */
-.contact-wrapper {
-  display: block; 
-  max-width: 100%;
-}
-.contact-section {
-  display: block;
-}
+/* --- CONTACT SECTION --- */
+.contact-layout { display: grid; grid-template-columns: 1fr 1.5fr; gap: 80px; }
+.info-list { display: flex; flex-direction: column; gap: 24px; }
+.info-item { display: flex; gap: 16px; align-items: flex-start; }
+.info-item i { font-size: 1.5rem; margin-top: 2px; }
+.underline-link { text-decoration: underline; color: var(--text-main); }
 
-/* Pevný styl formuláře */
-.benefit-card.contact-form {
-  background: #FFFFFF;
-  border: 1px solid rgba(0, 0, 0, 0.04);
-  border-radius: 24px;
-  padding: 24px;
-  text-align: left;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.06);
-  transition: transform .3s, box-shadow .3s, border-color .3s;
-  height: auto; 
-  backdrop-filter: none;
-  -webkit-backdrop-filter: none;
-  max-width: 500px; /* Centrování */
-  margin: 0 auto; /* Centrování */
-}
-.benefit-card.contact-form:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 20px 40px rgba(0,0,0,0.08);
-  border-color: rgba(44, 95, 45, 0.2);
-}
-.benefit-card.contact-form h3 {
-  color: #111827;
-  font-size: 1.25rem;
-  margin-bottom: 8px;
-}
-.benefit-card.contact-form input,
-.benefit-card.contact-form textarea {
-  width: 100%;
-  background: #f3f9f5;
-  border: 1.5px solid #cde3d3;
-  border-radius: 12px;
-  margin-bottom: 14px;
-  font-size: 1rem;
-  padding: 8px 12px;
-  box-shadow: 0 2px 8px rgba(44,95,45,0.04);
-  transition: border-color 0.3s, box-shadow 0.3s;
-  resize: none;
-  color: #111827;
-}
-.benefit-card.contact-form textarea {
-  min-height: 120px;
-  padding: 16px 18px;
-  font-size: 1.08rem;
-}
-.benefit-card.contact-form input:focus,
-.benefit-card.contact-form textarea:focus {
-  border-color: #2C5F2D;
-  box-shadow: 0 0 0 2px #cde3d3;
-  outline: none;
-}
-.benefit-card.contact-form label {
-  display: block;
-  font-size: 1rem;
-  color: #2C5F2D;
-  margin-bottom: 8px;
-  font-weight: 600;
-}
-.benefit-card.contact-form .checkbox-wrap {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 0px; /* Zarovnání */
-  margin-top: 4px;
-}
-.benefit-card.contact-form .checkbox-wrap input[type="checkbox"] {
-  appearance: none;
-  width: 16px;
-  height: 16px;
-  border: 2px solid #2C5F2D;
-  border-radius: 4px;
-  background: transparent;
-  cursor: pointer;
-  position: relative;
-  transition: all 0.3s ease;
-  padding: 0 !important;
-  margin: 0 !important;
-}
-.benefit-card.contact-form .checkbox-wrap input[type="checkbox"]:hover {
-  border-color: #388e3c;
-  transform: scale(1.1);
-}
-.benefit-card.contact-form .checkbox-wrap input[type="checkbox"]:checked {
-  background: #2C5F2D;
-  border-color: #2C5F2D;
-  transform: scale(1.1);
-}
-.benefit-card.contact-form .checkbox-wrap input[type="checkbox"]:checked::after {
-  content: '✓';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  color: white;
-  font-size: 9px;
-  font-weight: bold;
-  animation: checkmark 0.3s ease-in-out;
-}
-@keyframes checkmark {
-  0% { opacity: 0; transform: translate(-50%, -50%) scale(0.5); }
-  50% { transform: translate(-50%, -50%) scale(1.2); }
-  100% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
-}
-.benefit-card.contact-form .submit-btn {
-  background: #2C5F2D;
-  color: white;
-  border: none;
-  border-radius: 9999px;
-  padding: 12px 28px;
-  cursor: pointer;
-  font-size: 1rem;
-  font-weight: 600;
-  box-shadow: 0 2px 8px rgba(44,95,45,0.10);
-  transition: all 0.35s cubic-bezier(0.25,1,0.3,1);
-  margin-top: 0px;
-}
-.benefit-card.contact-form .submit-btn:hover {
-  background: #388e3c;
-  box-shadow: 0 8px 24px rgba(44,95,45,0.14);
-}
+.contact-form-container { background: transparent; }
+.contact-form { display: flex; flex-direction: column; gap: 20px; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
 
+.form-group label { display: block; margin-bottom: 8px; font-size: 0.9rem; font-weight: 500; }
+.form-group input, .form-group textarea {
+    width: 100%; padding: 12px; border: 1px solid var(--border-color); border-radius: var(--radius);
+    font-family: var(--font-body); font-size: 1rem; background: white;
+}
+.form-group input:focus, .form-group textarea:focus { outline: none; border-color: var(--blue-ribbon); }
 
-/* Toast */
-.toast{position:fixed;bottom:30px;left:50%;transform:translateX(-50%) translateY(40px);opacity:0;background:#1F2937;color:#F9FAFB;padding:12px 22px;border-radius:9999px;font-size:0.95rem;transition:all 0.4s ease;z-index:9999; box-shadow: 0 10px 30px rgba(0,0,0,0.1);}
-.toast.visible{transform:translateX(-50%) translateY(0);opacity:1}
-.toast.success{background:#10B981; color: #064E3B;}
-.toast.error{background:#e63946; color: #FFFFFF;}
+.checkbox-item { display: flex; align-items: center; gap: 10px; }
+.checkbox-item input { width: auto; }
+.checkbox-item label { margin-bottom: 0; font-weight: 400; color: var(--text-muted); }
 
-/* ========== "SKLENĚNÁ" PATIČKA ========== */
+/* --- FOOTER --- */
+/* --- FOOTER --- */
 footer {
- text-align: left;
- padding: 0;
- color: #4B5563; /* Tmavší šedý text */
- /* "Glassmorphism" patička */
- background: rgba(255, 255, 255, 0.7);
- backdrop-filter: blur(14px);
- -webkit-backdrop-filter: blur(14px);
- border-top: 1px solid rgba(255, 255, 255, 0.8);
- margin-top: 40px; /* Odsazení od obsahu */
-}
-.main-footer { padding-top: 60px; }
-.footer-container {
- max-width: 1200px;
- margin: 0 auto;
- padding: 0 24px;
- display: grid;
- grid-template-columns: 2fr 1.5fr;
- gap: 40px;
-}
-.footer-col h4 {
- font-size: 1.05rem;
- color: #111827;
- margin-bottom: 20px;
- font-weight: 600;
- text-transform: uppercase;
- letter-spacing: 0.5px;
-}
-.footer-col.footer-about .logo {
- margin-bottom: 16px;
- display: inline-block;
-}
-.footer-col.footer-about p { line-height: 1.7; max-width: 300px; color: #4B5563; }
-.footer-col ul { list-style: none; }
-.footer-col ul li { margin-bottom: 12px; }
-.footer-col ul li a, .footer-col a {
- text-decoration: none;
- color: #4B5563;
- transition: color 0.2s;
-}
-.footer-col ul li a:hover, .footer-col a:hover {
- color: #2C5F2D;
- text-decoration: underline;
-}
-.footer-col.footer-contact p { margin-bottom: 12px; line-height: 1.7; }
-.footer-col.footer-contact p a { display: inline-block; margin-top: 4px; }
-.footer-bottom {
- text-align: center;
- padding: 24px;
- margin-top: 40px;
- border-top: 1px solid rgba(0, 0, 0, 0.05);
- font-size: 0.9rem;
+    background-color: var(--bg-light); /* Světle šedé pozadí pro odlišení */
+    border-top: 1px solid var(--border-color);
+    padding: 80px 0 32px;
+    margin-top: 80px;
+    font-size: 0.9rem;
 }
 
-/* Technologie v patičce */
-.footer-tech-stack {
- display: flex;
- flex-direction: row;
- flex-wrap: wrap;
- gap: 24px;
- margin-top: 16px;
- align-items: center;
-}
-.tech-logo {
- display: inline-flex; 
- align-items: center;
- opacity: 0.7;
- transition: opacity 0.2s;
-}
-.tech-logo:hover { opacity: 1; }
-.tech-logo img {
- height: 32px;
- width: auto;
- filter: grayscale(100%);
- transition: filter 0.2s;
-}
-.tech-logo:hover img {
- filter: grayscale(0%);
+.footer-grid {
+    display: grid;
+    grid-template-columns: 1.5fr 0.8fr 1fr 1.2fr; /* Různé šířky sloupců pro lepší vzhled */
+    gap: 48px;
+    margin-bottom: 64px;
 }
 
-/* ========== RESPONZIVNÍ ÚPRAVY ========== */
-@media(max-width:768px){
-  .container{padding:0 16px}
-  
-  /* Hero */
-  .hero{padding:40px 16px;min-height:70vh}
-  .hero-card{grid-template-columns: 1fr; padding: 0;} /* Pod sebou */
-  .hero-illustration{margin-top:32px}
-  .hero-content h1{font-size:2.2rem;text-align:center}
-  .hero-content p{text-align:center;font-size:1rem}
-  .hero-btn{padding:14px 32px;font-size:1rem;display:block;margin:0 auto;text-align:center}
-  
-  /* Sekce */
-  section{padding:48px 16px}
-  .section-title{font-size:1.8rem;margin-bottom:24px}
-  
-  /* Karty */
-  .benefits{grid-template-columns:1fr;gap:16px;max-width:100%}
-  .benefit-card{padding:20px;border-radius:24px}
-  
-  /* Kontakt */
-  .contact-wrapper{flex-direction:column;gap:24px;align-items:center}
-  .benefit-card.contact-form{height:auto;padding:28px 24px}
-  
-  /* Projekty */
-  .projects-header{flex-direction:column;align-items:center}
-  .projects-actions{align-self:stretch}
-  .projects-empty{padding:24px}
-  
-  /* Patička */
-  .footer-container { grid-template-columns: 1fr; gap: 40px; }
-  .footer-col.footer-about p { max-width: none; }
+.footer-col h5 {
+    font-size: 1rem;
+    margin-bottom: 20px;
+    color: var(--text-main);
 }
 
-@media(max-width:480px){
-  .container{padding:0 12px}
-  
-  .main-nav {
-    top: 64px; /* Shoduje se s výškou .header-inner (64px) */
-  }
+/* Odkazy v patičce */
+.footer-links-list li, .footer-contact-list li {
+    margin-bottom: 12px;
+}
 
-  /* Hlavička */
-  .header-inner{height:64px}
-  .logo{padding:8px 16px;font-size:0.95rem}
-  .logo-icon { height: 20px; }
-  .header-btn{padding:6px 14px;font-size:0.85rem}
-  
-  /* Hero */
-  .hero{padding:32px 12px;min-height:60vh}
-  .hero-content h1{font-size:1.8rem;line-height:1.3}
-  .hero-content p{font-size:0.95rem;margin-bottom:20px}
-  .hero-btn{padding:12px 28px;font-size:0.95rem}
-  .hero-illustration svg{max-width:200px}
-  
-  /* Sekce */
-  section{padding:40px 12px}
-  .section-title{font-size:1.6rem;margin-bottom:20px}
-  
-  /* Karty */
-  .benefit-card{padding:18px;border-radius:20px}
-  
-  /* Formulář */
-  .benefit-card.contact-form{padding:24px 20px}
-  .benefit-card.contact-form .form-row{flex-direction:column;align-items:stretch;gap:12px;}
-  .benefit-card.contact-form .submit-btn { 
+.footer-links-list a {
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.2s;
+}
+.footer-links-list a:hover {
+    color: var(--blue-ribbon);
+}
+
+/* Kontaktní seznam s ikonkami */
+.footer-contact-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    color: var(--text-muted);
+}
+.footer-contact-list i {
+    margin-top: 3px;
+    color: var(--blue-ribbon);
+}
+.footer-contact-list a {
+    color: var(--text-muted);
+    text-decoration: none;
+}
+
+/* Sociální sítě */
+.socials {
+    display: flex;
+    gap: 16px;
+}
+.socials a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    background-color: white;
+    border: 1px solid var(--border-color);
+    border-radius: 50%;
+    color: var(--text-main);
+    transition: all 0.2s;
+}
+.socials a:hover {
+    background-color: var(--blue-ribbon);
+    color: white;
+    border-color: var(--blue-ribbon);
+}
+
+/* Newsletter Input (tlačítko uvnitř inputu) */
+.input-group {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+.input-group input {
     width: 100%;
-    padding: 12px 28px !important;
-    font-size: 1rem !important;
-    margin-top: 8px !important;
-  }
-  .benefit-card.contact-form .checkbox-wrap label { font-size: 0.95rem; }
-
-  /* Projekty */
-  .projects-empty{padding:20px}
-  .empty-ctas{flex-direction:column;gap:8px}
-  .empty-ctas .btn{width:100%;padding:12px 20px}
-  .filter-bar .filter-btn{padding:6px 14px;font-size:0.9rem}
-  
-  /* Patička */
-  .footer-bottom{padding:24px 12px;font-size:0.9rem}
+    padding: 12px 48px 12px 16px; /* Místo vpravo pro tlačítko */
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    background: white;
 }
-@media(max-width:360px){
- .benefit-card.contact-form{padding:20px 16px}
+.input-group input:focus {
+    outline: none;
+    border-color: var(--blue-ribbon);
+}
+.btn-icon {
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: var(--blue-ribbon);
+    color: white;
+    border: none;
+    width: 32px;
+    height: 32px;
+    border-radius: 6px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
+}
+.btn-icon:hover {
+    background: #0055CC;
+}
+
+/* Spodní lišta */
+.footer-bottom {
+    border-top: 1px solid var(--border-color);
+    padding-top: 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--text-muted);
+    font-size: 0.85rem;
+}
+.legal-links {
+    display: flex;
+    gap: 24px;
+}
+.legal-links a {
+    color: var(--text-muted);
+    text-decoration: none;
+}
+.legal-links a:hover {
+    text-decoration: underline;
+}
+
+/* Responzivita */
+@media (max-width: 900px) {
+    .footer-grid {
+        grid-template-columns: 1fr 1fr; /* 2 sloupce na tabletu */
+        gap: 32px;
+    }
+    .brand-col {
+        grid-column: span 2; /* Logo přes celou šířku */
+    }
+}
+@media (max-width: 600px) {
+    .footer-grid {
+        grid-template-columns: 1fr; /* 1 sloupec na mobilu */
+    }
+    .brand-col {
+        grid-column: span 1;
+    }
+    .footer-bottom {
+        flex-direction: column;
+        gap: 16px;
+        text-align: center;
+    }
+}
+/* --- KARTIČKOVÝ DESIGN PRO RADIO BUTTONY (RADIO CARD) --- */
+.radio-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+/* Karta možnosti (Label) */
+.radio-card {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 16px;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    cursor: pointer;
+    background: var(--bg-body);
+    transition: all 0.2s ease;
+    text-align: center;
+    user-select: none;
+}
+
+/* Skrytí výchozího kolečka */
+.radio-card input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+/* Text uvnitř karty */
+.card-content {
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--text-muted);
+}
+
+/* Hover efekt */
+.radio-card:hover {
+    border-color: var(--blue-ribbon);
+    background-color: rgba(10, 102, 255, 0.03);
+    color: var(--blue-ribbon);
+}
+
+/* Efekt při vybrání */
+/* Poznámka: :has() je moderní CSS selektor, podporovaný ve všech moderních prohlížečích */
+.radio-card:has(input:checked) {
+    background-color: rgba(10, 102, 255, 0.1);
+    border-color: var(--blue-ribbon);
+    box-shadow: 0 0 0 1px var(--blue-ribbon);
+}
+.radio-card:has(input:checked) .card-content {
+    color: var(--blue-ribbon);
+    font-weight: 600;
+}
+
+/* --- STYL PRO SELECT (ROLETKA) --- */
+select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    background-color: var(--bg-body);
+    color: var(--text-main);
+    font-family: var(--font-body);
+    font-size: 1rem;
+    appearance: none; /* Odstraní výchozí šipku */
+    cursor: pointer;
+    /* Vlastní šipka SVG */
+    background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23111827%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px top 50%;
+    background-size: 12px auto;
+}
+select:focus { outline: none; border-color: var(--blue-ribbon); }
+
+
+/* --- RESPONSIVE --- */
+@media (max-width: 900px) {
+    .hero-grid, .contact-layout { grid-template-columns: 1fr; gap: 48px; }
+    .nav-links { display: none; }
+    .menu-toggle { display: flex; }
+    h1 { font-size: 2.5rem; }
+    .footer-grid { grid-template-columns: 1fr 1fr; }
+    .brand-col { grid-column: span 2; }
+    .form-row, .radio-grid { grid-template-columns: 1fr; }
+}
+textarea {
+    resize: none;
 }
