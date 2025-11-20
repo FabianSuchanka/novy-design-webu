@@ -1,395 +1,350 @@
-// script.js - shapes (PNG-aware), reveal, logo click, toast, form submit
-(function(){
-  /* ===== reveal on scroll (data-reveal) ===== */
-  const reveals = document.querySelectorAll('[data-reveal]');
-  function revealOnScroll(){
-    const windowHeight = window.innerHeight;
-    reveals.forEach(el=>{
-      const top = el.getBoundingClientRect().top;
-      if(top < windowHeight - 100) el.classList.add('active');
-      else el.classList.remove('active');
-    });
-  }
-  window.addEventListener('scroll', revealOnScroll);
-  window.addEventListener('resize', revealOnScroll);
-  window.addEventListener('load', revealOnScroll);
+document.addEventListener('DOMContentLoaded', () => {
+    
+    // --- 1. SLOVNÍK PŘEKLADŮ (beze změny) ---
+    const translations = {
+        cs: {
+            // NAVIGACE
+            nav_home: "Domů",
+            nav_services: "Inovace",
+            nav_projects: "Portfolio",
+            nav_about: "O nás",
+            nav_contact: "Kontakt",
+            btn_inquire: "Poptat",
+            
+            // HERO
+            hero_title: "Automatizace, která šetří váš čas",
+            hero_subtitle: "Uvolněte své týmy, rutinu nechte na nás. Chcete vědět, jak na to?",
+            btn_consultation: "Konzultace",
+            btn_more: "Více",
+            tech_label: "Technologie, kterým věříme",
 
-  /* ===== logo click => smooth top (also keyboard) ===== */
-  const logo = document.getElementById('logo');
-  if(logo){
-    logo.addEventListener('click', ()=>{ window.scrollTo({ top: 0, behavior: 'smooth' }); });
-    logo.addEventListener('keydown', (e)=> { if(e.key === 'Enter' || e.key === ' ') { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); }});
-  }
+            // SLUŽBY
+            services_label: "Inovace",
+            services_title: "Na míru šitá řešení",
+            services_subtext: "Každý projekt je jiný. Budujeme to, co vám opravdu pomůže.",
+            feat_1_label: "Rychlost",
+            feat_1_title: "Rychlá implementace bez zbytečných průtahů",
+            feat_1_desc: "Máme zkušenosti. Víme, jak to udělat efektivně a bez chyb.",
+            feat_2_label: "Bezpečnost",
+            feat_2_title: "Spolehlivá práce s vašimi daty",
+            feat_2_desc: "Vaše informace jsou v bezpečí. Pracujeme podle nejpřísnějších standardů.",
+            feat_3_label: "Kreativita",
+            feat_3_title: "Neobvyklé přístupy k běžným problémům",
+            feat_3_desc: "Někdy nejlepší řešení není to nejjednodušší. Hledáme to správné.",
 
-  /* ===== mobile menu toggle (OPRAVENO) ===== */
-  const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
-  const mainNav = document.querySelector('.main-nav');
-  
-  if(mobileMenuToggle && mainNav){
-    mobileMenuToggle.addEventListener('click', () => {
-      const isOpen = mainNav.classList.contains('mobile-open');
+            // PORTFOLIO
+            portfolio_label: "Portfolio",
+            portfolio_title: "Projekty, které jsme vytvořili",
+            portfolio_subtext: "Podívejte se, jak jsme pomohli jiným firmám ušetřit čas a peníze.",
+            proj_1_title: "Automatizace faktur",
+            proj_1_desc: "Faktury se teď generují samy. Bez chyb, bez čekání.",
+            tag_accounting: "Účetnictví",
+            proj_2_title: "Třídění e-mailů AI",
+            proj_2_desc: "Umělá inteligence teď zná rozdíl mezi důležitým a zbytečným.",
+            proj_3_title: "Scraping dat",
+            proj_3_desc: "Data se sbírají sama. Nic se neztratí, nic se nezmešká.",
+            tag_scripts: "Skripty",
 
-      if(isOpen){
-        mainNav.classList.remove('mobile-open');
-        mobileMenuToggle.classList.remove('active');
-        mobileMenuToggle.setAttribute('aria-expanded', 'false');
-        mobileMenuToggle.setAttribute('aria-label', 'Otevřít menu');
-      } else {
-        mainNav.classList.add('mobile-open');
-        mobileMenuToggle.classList.add('active');
-        mobileMenuToggle.setAttribute('aria-expanded', 'true');
-        mobileMenuToggle.setAttribute('aria-label', 'Zavřít menu');
-      }
-    });
+            // O NÁS (NOVÉ)
+            about_title: "Dva nadšenci, jeden cíl",
+            about_subtext: "Nejsme korporát. Jsme mladý tým, který baví technologie a efektivita.",
+            about_desc_1: "SpecifAI tvoříme my dva. Máme energii, chuť pracovat a neustále se učit nové věci. Svět automatizace se mění každý den a my držíme krok.",
+            about_desc_2: "Nehledáme složitá řešení. Chceme jediné: ušetřit vám peníze a zbavit vás nudné práce.",
 
-    // Close menu when clicking on nav links
-    const navLinks = mainNav.querySelectorAll('a');
-    navLinks.forEach(link => {
-      link.addEventListener('click', () => {
-        mainNav.classList.remove('mobile-open');
-        mobileMenuToggle.classList.remove('active');
-        mobileMenuToggle.setAttribute('aria-expanded', 'false');
-        mobileMenuToggle.setAttribute('aria-label', 'Otevřít menu');
-      });
-    });
+            // KONTAKT - INFO
+            contact_label: "Kontakt",
+            contact_title: "Pojďme spolu",
+            contact_subtext: "Máte otázku? Chcete vědět víc? Ozvěte se nám. Odpovíme rychle.",
+            email_label: "E-mail",
+            office_label: "Kancelář",
 
-    // Close menu when clicking outside
-    document.addEventListener('click', (e) => {
-      if(!mainNav.contains(e.target) && !mobileMenuToggle.contains(e.target) && mainNav.classList.contains('mobile-open')){
-        mainNav.classList.remove('mobile-open');
-        mobileMenuToggle.classList.remove('active');
-        mobileMenuToggle.setAttribute('aria-expanded', 'false');
-        mobileMenuToggle.setAttribute('aria-label', 'Otevřít menu');
-      }
-    });
+            // KONTAKT - FORMULÁŘ
+            form_title: "Napište nám",
+            label_fname: "Jméno",
+            label_lname: "Příjmení",
+            label_email: "E-mail",
+            label_phone: "Telefonní číslo",
+            label_topic: "Vyberte téma",
+            label_company_type: "Jaký jste typ firmy?",
+            label_msg: "Zpráva",
+            label_consent: "Souhlasím se zpracováním údajů",
+            btn_send: "Odeslat",
+            ph_fname: "Jan",
+            ph_lname: "Novák",
+            ph_email: "jan@firma.cz",
+            ph_phone: "+420 777 123 456",
+            ph_msg: "Napište nám...",
 
-    // Close menu on escape key
-    document.addEventListener('keydown', (e) => {
-      if(e.key === 'Escape' && mainNav.classList.contains('mobile-open')){
-        mainNav.classList.remove('mobile-open');
-        mobileMenuToggle.classList.remove('active');
-        mobileMenuToggle.setAttribute('aria-expanded', 'false');
-        mobileMenuToggle.setAttribute('aria-label', 'Otevřít menu');
-      }
-    });
-  }
-  
-  /* ===== shapes / logos animation (Nyní skryté přes CSS) ===== */
-  const wrapper = document.getElementById('logoShapes');
-  if(wrapper){
-    const shapes = Array.from(wrapper.querySelectorAll('.logo-shape, .shape'));
-    if(shapes.length){
-      // initialize logos: if element has data-src, use it as background-image
-      shapes.forEach((el)=>{
-        const src = el.dataset ? el.dataset.src : null;
-        const size = el.dataset && el.dataset.size ? parseInt(el.dataset.size,10) : null;
-        if(src){
-          el.style.backgroundImage = `url("${src}")`;
-          el.style.backgroundSize = 'contain';
-          el.style.backgroundRepeat = 'no-repeat';
-          el.style.backgroundPosition = 'center';
-          el.style.opacity = '0'; // will be animated in loop
+            opt_select: "Zvolte...",
+            opt_inquiry: "Poptávka",
+            opt_consultation: "Konzultace",
+            opt_career: "Kariéra",
+            opt_other: "Jiné",
+
+            company_small: "Malá firma",
+            company_medium: "Střední podnik",
+            company_corp: "Velká korporace",
+            company_startup: "Startup",
+            company_nonprofit: "Neziskovka",
+            company_other: "Jiné",
+
+            // PATIČKA
+            footer_desc: "Pomáháme firmám růst pomocí chytré automatizace a umělé inteligence. Uvolněte ruce svému týmu.",
+            footer_nav: "Navigace",
+            footer_contact: "Kontakt",
+            footer_stay_updated: "Zůstaňte v obraze",
+            footer_newsletter_text: "Tipy a triky o automatizaci přímo do vašeho emailu.",
+            placeholder_email: "Váš e-mail",
+            all_rights: "Všechna práva vyhrazena.",
+            privacy_policy: "Zásady ochrany osobních údajů",
+            terms: "Obchodní podmínky"
+        },
+        en: {
+            // NAV
+            nav_home: "Home",
+            nav_services: "Innovation",
+            nav_projects: "Portfolio",
+            nav_about: "About",
+            nav_contact: "Contact",
+            btn_inquire: "Inquire",
+            
+            // HERO
+            hero_title: "Automation that saves your time",
+            hero_subtitle: "Free your teams, leave the routine to us. Want to know how?",
+            btn_consultation: "Consultation",
+            btn_more: "More info",
+            tech_label: "Technologies we believe in",
+
+            // SERVICES
+            services_label: "Innovation",
+            services_title: "Tailor-made solutions",
+            services_subtext: "Every project is different. We build what really helps you.",
+            feat_1_label: "Speed",
+            feat_1_title: "Fast implementation without delays",
+            feat_1_desc: "We have experience. We know how to do it efficiently and without errors.",
+            feat_2_label: "Security",
+            feat_2_title: "Reliable data handling",
+            feat_2_desc: "Your information is safe. We work according to the strictest standards.",
+            feat_3_label: "Creativity",
+            feat_3_title: "Unusual approaches to common problems",
+            feat_3_desc: "Sometimes the best solution isn't the simplest one. We find the right one.",
+
+            // PORTFOLIO
+            portfolio_label: "Portfolio",
+            portfolio_title: "Projects we created",
+            portfolio_subtext: "See how we helped other companies save time and money.",
+            proj_1_title: "Invoice Automation",
+            proj_1_desc: "Invoices are now generated automatically. No errors, no waiting.",
+            tag_accounting: "Accounting",
+            proj_2_title: "AI Email Sorting",
+            proj_2_desc: "Artificial intelligence now knows the difference between important and useless.",
+            proj_3_title: "Data Scraping",
+            proj_3_desc: "Data is collected automatically. Nothing gets lost, nothing gets missed.",
+            tag_scripts: "Scripts",
+
+            // ABOUT (NEW)
+            about_title: "Two enthusiasts, one goal",
+            about_subtext: "No corporate nonsense. We are a young team driven by technology and efficiency.",
+            about_desc_1: "SpecifAI is just the two of us. We have energy, passion to work, and a constant drive to learn. The world of automation changes daily, and we keep up.",
+            about_desc_2: "We don't seek complexity. We want one thing: to save you money and free you from boring tasks.",
+
+            // CONTACT - INFO
+            contact_label: "Contact",
+            contact_title: "Let's work together",
+            contact_subtext: "Have a question? Want to know more? Get in touch. We answer fast.",
+            email_label: "Email",
+            office_label: "Office",
+
+            // CONTACT - FORM
+            form_title: "Write to us",
+            label_fname: "First Name",
+            label_lname: "Last Name",
+            label_email: "Email",
+            label_phone: "Phone Number",
+            label_topic: "Select Topic",
+            label_company_type: "Company Type",
+            label_msg: "Message",
+            label_consent: "I agree to data processing",
+            btn_send: "Send",
+            ph_fname: "John",
+            ph_lname: "Doe",
+            ph_email: "john@company.com",
+            ph_phone: "+1 234 567 890",
+            ph_msg: "Write us something...",
+
+            opt_select: "Choose...",
+            opt_inquiry: "Inquiry",
+            opt_consultation: "Consultation",
+            opt_career: "Career",
+            opt_other: "Other",
+
+            company_small: "Small Business",
+            company_medium: "Medium Enterprise",
+            company_corp: "Corporation",
+            company_startup: "Startup",
+            company_nonprofit: "Non-profit",
+            company_other: "Other",
+
+            // FOOTER
+            footer_desc: "Helping businesses grow with smart automation and AI. Free up your team's hands.",
+            footer_nav: "Navigation",
+            footer_contact: "Contact",
+            footer_stay_updated: "Stay Updated",
+            footer_newsletter_text: "Automation tips and tricks straight to your inbox.",
+            placeholder_email: "Your email",
+            all_rights: "All rights reserved.",
+            privacy_policy: "Privacy Policy",
+            terms: "Terms & Conditions"
         }
-        if(size){
-          el.style.width = `${size}px`;
-          el.style.height = `${size}px`;
-        }
-        if(!el.style.left) el.style.left = `${5 + Math.random()*85}%`;
-        if(!el.style.top) el.style.top = `${5 + Math.random()*65}%`;
-      });
+    };
 
-      const cfg = shapes.map((el, i) => {
-        const cs = getComputedStyle(el);
-        const left = parseFloat(el.style.left) || (5 + Math.random()*85);
-        const top = parseFloat(el.style.top) || (5 + Math.random()*65);
-        const width = parseFloat(cs.width) || 100;
-        const floatAmp = 6 + Math.random()*18;
-        const floatFreq = 0.4 + Math.random()*1.0;
-        const speed = 0.2 + Math.random()*0.9;
-        const rot = (Math.random()-0.5) * 12;
-        return { el, left, top, width, floatAmp, floatFreq, speed, rot, idx: i };
-      });
+    // --- 2. LOGIKA PŘEPÍNÁNÍ JAZYKA ---
+    let currentLang = 'cs'; 
+    const langBtn = document.getElementById('langBtn');
 
-      let start = performance.now();
-      function animate(now){
-        const t = (now - start) / 1000;
-        const scrollY = window.scrollY || window.pageYOffset;
-        const vh = Math.max(window.innerHeight, 700);
-        cfg.forEach((c, i)=>{
-          const baseY = (c.top / 100) * vh;
-          const floatY = Math.sin(t * c.floatFreq + i) * c.floatAmp;
-          const parallaxY = scrollY * c.speed * 0.15;
-          const swayX = Math.sin(t * (0.25 + i*0.05)) * (Math.min(12, c.width*0.06));
-          const translateY = baseY + floatY + parallaxY;
-          const translateX = swayX + ((c.left - 50) * 0.3);
-          const rot = c.rot + Math.sin(t * (0.15 + i*0.02)) * 3;
-          c.el.style.transform = `translate3d(${translateX}px, ${translateY}px, 0) rotate(${rot}deg)`;
-
-          const visibleRatio = 1 - Math.min(Math.abs((baseY - scrollY) / (vh * 1.2)), 1);
-          c.el.style.opacity = (0.35 + 0.65 * visibleRatio).toString();
+    function updateLanguage(lang) {
+        // A) Obecné texty
+        document.querySelectorAll('[data-i18n]').forEach(el => {
+            const key = el.getAttribute('data-i18n');
+            if (translations[lang][key]) {
+                if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') el.placeholder = translations[lang][key];
+                else el.textContent = translations[lang][key];
+            }
         });
-        requestAnimationFrame(animate);
-      }
-      requestAnimationFrame(animate);
+
+        // B) Placeholdery
+        const inputs = { 'fname': 'ph_fname', 'lname': 'ph_lname', 'email': 'ph_email', 'phone': 'ph_phone', 'msg': 'ph_msg' };
+        for (const [id, key] of Object.entries(inputs)) {
+            const el = document.getElementById(id);
+            if(el) el.placeholder = translations[lang][key];
+        }
+
+        // C) Roletka 1 (Téma)
+        const topicSelect = document.getElementById('topic');
+        if (topicSelect) {
+            topicSelect.options[0].text = translations[lang].opt_select;
+            topicSelect.options[1].text = translations[lang].opt_inquiry;
+            topicSelect.options[2].text = translations[lang].opt_consultation;
+            topicSelect.options[3].text = translations[lang].opt_career;
+            topicSelect.options[4].text = translations[lang].opt_other;
+        }
+
+        // D) Roletka 2 (Typ firmy) - NOVÉ
+        const companySelect = document.getElementById('company-type');
+        if (companySelect) {
+            companySelect.options[0].text = translations[lang].opt_select;
+            companySelect.options[1].text = translations[lang].company_small;
+            companySelect.options[2].text = translations[lang].company_medium;
+            companySelect.options[3].text = translations[lang].company_corp;
+            companySelect.options[4].text = translations[lang].company_startup;
+            companySelect.options[5].text = translations[lang].company_nonprofit;
+            companySelect.options[6].text = translations[lang].company_other;
+        }
+
+        langBtn.textContent = lang === 'cs' ? 'EN' : 'CZ';
+        currentLang = lang;
+        document.documentElement.lang = lang;
     }
-  }
 
-// filtr + aktivní stav
-const buttons = document.querySelectorAll('.btn, .filter-btn');
+    langBtn.addEventListener('click', () => {
+        document.body.classList.add('fade-out');
+        setTimeout(() => {
+            const newLang = currentLang === 'cs' ? 'en' : 'cs';
+            updateLanguage(newLang);
+            document.body.classList.remove('fade-out');
+        }, 300);
+    });
 
-buttons.forEach(btn => {
-  btn.addEventListener('click', () => {
-    buttons.forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-  });
+    // --- 3. SCROLLOVÁNÍ & MENU ---
+    function smoothScrollTo(targetId) {
+        const target = document.querySelector(targetId);
+        if (target) {
+            const offset = 80;
+            const top = target.getBoundingClientRect().top + window.pageYOffset - offset;
+            window.scrollTo({ top, behavior: "smooth" });
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const id = this.getAttribute('href');
+            if (id !== '#') {
+                smoothScrollTo(id);
+                if(window.innerWidth <= 900) {
+                    navLinks.style.display = 'none';
+                    navLinks.style.removeProperty('flex-direction');
+                    navLinks.style.removeProperty('position');
+                }
+            }
+        });
+    });
+
+    const menuToggle = document.getElementById('menuToggle');
+    const navLinks = document.getElementById('navLinks');
+    if (menuToggle) {
+        menuToggle.addEventListener('click', () => {
+            navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+            if (navLinks.style.display === 'flex') {
+                Object.assign(navLinks.style, {
+                    flexDirection: 'column', position: 'absolute', top: '72px', left: '0', width: '100%',
+                    background: 'white', padding: '24px', borderBottom: '1px solid #e5e7eb', boxShadow: '0 10px 15px -3px rgba(0,0,0,0.1)'
+                });
+            }
+        });
+    }
+
+    // --- 4. ODESLÁNÍ FORMULÁŘE (MAKE.COM) ---
+    const contactForm = document.querySelector('.contact-form');
+    if (contactForm) {
+        contactForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const btn = contactForm.querySelector('button[type="submit"]');
+            const originalText = btn.textContent;
+            
+            btn.textContent = currentLang === 'cs' ? "Odesílám..." : "Sending...";
+            btn.disabled = true;
+            
+            // Sběr dat (upraveno pro novou roletku)
+            const formData = {
+                jmeno: document.getElementById('fname').value,
+                prijmeni: document.getElementById('lname').value,
+                email: document.getElementById('email').value,
+                telefon: document.getElementById('phone').value,
+                tema: document.getElementById('topic').value,
+                
+                // Zde čteme hodnotu z nové roletky
+                typFirmy: document.getElementById('company-type').value || "Neuvedeno",
+                
+                zprava: document.getElementById('msg').value
+            };
+
+            try {
+                // TVŮJ WEBHOOK URL
+                const webhookUrl = 'https://hook.eu2.make.com/7g7ghz2u7b2w3cbqmkf21jjnvj64gasv';
+                
+                await fetch(webhookUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(formData)
+                });
+
+                btn.textContent = currentLang === 'cs' ? "Odesláno ✓" : "Sent ✓";
+                btn.style.background = "#00B388";
+                btn.style.borderColor = "#00B388";
+                contactForm.reset();
+            } catch (error) {
+                console.error("Chyba:", error);
+                btn.textContent = "Error";
+                btn.style.background = "red";
+            } finally {
+                setTimeout(() => {
+                    btn.textContent = originalText;
+                    btn.style.background = "";
+                    btn.style.borderColor = "";
+                    btn.disabled = false;
+                }, 3000);
+            }
+        });
+    }
 });
-
-document.addEventListener("DOMContentLoaded", () => {
-  const langBtn = document.getElementById("lang-btn");
-  let currentLang = "cs";
-
-  const translations = {
-    cs: {
-      htmlLang: "cs",
-      title: "SpecifAI",
-      metaDescription: "Specifai - moderní řešení pro vaše podnikání.",
-      headerNav: ["Služby", "Projekty", "O nás", "Reference", "Kontakt"],
-      heroTitle: "Automatizace, která šetří váš čas a peníze",
-      heroText: "Chytrá řešení pro vaši firmu – s AI i bez AI. Uvolněte své týmy, nechte rutinu na nás.",
-      heroBtn: "Zjistit víc",
-      servicesTitle: "Naše služby",
-      serviceCards: [
-        { title: "💡 Inovace", text: "Navrhujeme moderní a efektivní řešení přesně na míru. Každý projekt přizůsobujeme individuálním potřebám klienta." },
-        { title: "🚀 Rychlost", text: "Implementace projektů probíhá rychle a efektivně, přičemž zachováváme vysokou kvalitu a spolehlivost řešení." },
-        { title: "🔒 Bezpečnost", text: "Dbáme na bezpečnost a spolehlivost všech našich řešení, aby naši klienti mohli pracovat bez obav." }
-      ],
-      projects: {
-        title: "Projekty",
-        filters: ["Vše", "Make", "AI", "Skript / Non-AI"],
-        emptyTitle: "Žádné projekty zatím nejsou",
-        emptyText: "Jakmile sem přidáte případové studie, budou se tu krásně zobrazovat. Prozatím můžete nahrát vlastní.",
-        emptyAdd: "Přidat ukázkový projekt",
-        emptyConsult: "Chci konzultaci"
-      },
-      aboutTitle: "O nás",
-      aboutCards: [
-        { title: "Expertíza v automatizacích", text: "Optimalizujeme procesy a vytváříme chytré automatizace, které firmám šetří čas a peníze." },
-        { title: "Kreativní tým", text: "Naši specialisté kombinují teoretické know-how s praktickými dovednostmi, aby dodali reálné výsledky." },
-        { title: "Zodpovědnost", text: "Pracujeme důkladně a s důrazem na bezpečnost, kvalitu a dlouhodobou hodnotu pro klienty." }
-      ],
-      testimonialsTitle: "Co říkají naši klienti",
-      contactTitle: "Kontakt", 
-      contactForm: {
-        heading: "Kontaktujte nás", 
-        placeholders: { name: "Vaše jméno", email: "vas@email.cz", tel: "Tel. číslo", message: "Vaše zpráva" },
-        consent: "Souhlasím se zpracováním údajů",
-        submit: "Odeslat"
-      },
-      companyInfo: { 
-        nameLabel: "SpecifAI s.r.o.", 
-        addressValue: "Zatím žadná, ale v Brně",
-        icoValue: "IČO: Taky není",
-        dicValue: "DIČ: Taky není",
-        phoneValue: "+420 773 952 636",
-        emailValue: "kontakt@specifai.cz"
-      },
-      toast: "Vaše zpráva byla úspěšně odeslána",
-      footer: { 
-        about: "Chytrá řešení pro vaši firmu – s AI i bez AI. Uvolněte své týmy, nechte rutinu na nás.",
-        techTitle: "Technologie",
-        contactTitle: "Firemní údaje",
-        copyright: "© 2025 SpecifAI.",
-        privacy: "Zásady ochrany osobních údajů"
-      },
-      headerBtnText: "CZ/EN"
-    },
-
-    en: {
-      htmlLang: "en",
-      title: "SpecifAI",
-      metaDescription: "Specifai - modern solutions for your business.",
-      headerNav: ["Services", "Projects", "About", "Testimonials", "Contact"],
-      heroTitle: "Automation that saves your time and money",
-      heroText: "Smart solutions for your business – with or without AI. Free your teams, leave the routine to us.",
-      heroBtn: "Learn more",
-      servicesTitle: "Our Services",
-      serviceCards: [
-        { title: "💡 Innovation", text: "We design modern and efficient solutions tailored exactly to your needs." },
-        { title: "🚀 Speed", text: "Projects are implemented quickly and efficiently while maintaining high quality and reliability." },
-        { title: "🔒 Security", text: "We ensure security and reliability so you can work without worries." }
-      ],
-      projects: {
-        title: "Projects",
-        filters: ["All", "Make", "AI", "Script / Non-AI"],
-        emptyTitle: "No projects yet",
-        emptyText: "Once you add case studies they'll appear here. For now you can upload your own.",
-        emptyAdd: "Add sample project",
-        emptyConsult: "Request consultation"
-      },
-      aboutTitle: "About",
-      aboutCards: [
-        { title: "Expertise in automations", text: "We optimize processes and build smart automations that save companies time and money." },
-        { title: "Creative team", text: "Our specialists combine theoretical know-how with practical skills to deliver real results." },
-        { title: "Responsibility", text: "We work thoroughly with emphasis on security, quality and long-term value for clients." }
-      ],
-      testimonialsTitle: "What our clients say",
-      contactTitle: "Contact", 
-      contactForm: {
-        heading: "Contact us", 
-        placeholders: { name: "Your name", email: "your@email.com", tel: "Phone number", message: "Your message" },
-        consent: "I consent to the processing of data",
-        submit: "Send"
-      },
-      companyInfo: {
-        nameLabel: "SpecifAI s.r.o.",
-        addressValue: "Not yet, but in Brno",
-        icoValue: "ID: not yet",
-        dicValue: "VAT: not yet",
-        phoneValue: "+420 773 952 636",
-        emailValue: "kontakt@specifai.cz"
-      },
-      toast: "Your message has been sent successfully",
-      footer: {
-        about: "Smart solutions for your business – with or without AI. Free your teams, leave the routine to us.",
-        techTitle: "Technologies",
-        contactTitle: "Company details",
-        copyright: "© 2025 SpecifAI.",
-        privacy: "Privacy Policy"
-      },
-      headerBtnText: "EN/CZ"
-    }
-  };
-
-  // funkce pro bezpečné nasazení textu (pokud element existuje)
-  const safeSetText = (selector, text, useInnerHTML = false) => {
-    const el = document.querySelector(selector);
-    if (!el) return;
-    if (useInnerHTML) el.innerHTML = text;
-    else el.textContent = text;
-  };
-  
-  // funkce pro bezpečné nasazení textu na více elementů
-  const safeSetTextAll = (selector, texts) => {
-    const els = document.querySelectorAll(selector);
-    els.forEach((el, i) => {
-      if(el && texts[i]) el.textContent = texts[i];
-    });
-  };
-
-  function applyLanguage(lang) {
-    const t = translations[lang];
-
-    document.documentElement.lang = t.htmlLang;
-    if (t.title) document.title = t.title;
-    const metaDesc = document.querySelector('meta[name="description"]');
-    if (metaDesc) metaDesc.setAttribute("content", t.metaDescription || "");
-
-    // header nav
-    safeSetTextAll("header nav ul li a", t.headerNav);
-
-    // hero
-    safeSetText(".hero-content h1", t.heroTitle);
-    safeSetText(".hero-content p", t.heroText);
-    safeSetText(".hero-btn", t.heroBtn);
-
-    // services
-    safeSetText("#services .section-title", t.servicesTitle);
-    const serviceCards = document.querySelectorAll("#services .benefit-card");
-    serviceCards.forEach((card, i) => {
-      if (!t.serviceCards[i]) return;
-      safeSetText(`#services .benefit-card:nth-of-type(${i+1}) h3`, t.serviceCards[i].title);
-      safeSetText(`#services .benefit-card:nth-of-type(${i+1}) p`, t.serviceCards[i].text);
-    });
-
-    // projects
-    safeSetText("#projects .section-title", t.projects.title);
-    safeSetTextAll(".filter-bar .filter-btn", t.projects.filters);
-    safeSetText("#projects-empty h3", t.projects.emptyTitle);
-    safeSetText("#projects-empty .muted", t.projects.emptyText);
-    safeSetText("#empty-add", t.projects.emptyAdd);
-    safeSetText("#projects-empty .empty-ctas .btn-link", t.projects.emptyConsult);
-    
-    // about
-    safeSetText("#about .section-title", t.aboutTitle);
-    const aboutCards = document.querySelectorAll("#about .benefit-card");
-    aboutCards.forEach((card, i) => {
-        if (!t.aboutCards[i]) return;
-        safeSetText(`#about .benefit-card:nth-of-type(${i+1}) h3`, t.aboutCards[i].title);
-        safeSetText(`#about .benefit-card:nth-of-type(${i+1}) p`, t.aboutCards[i].text);
-    });
-    
-    // Testimonials
-    safeSetText("#testimonials .section-title", t.testimonialsTitle);
-
-    // contact
-    safeSetText("#contact .section-title", t.contactTitle);
-    safeSetText("#contact-form h3", t.contactForm.heading);
-    const inputName = document.getElementById("name");
-    const inputEmail = document.getElementById("email");
-    const inputTel = document.getElementById("tel");
-    const textarea = document.getElementById("message");
-    if (inputName) inputName.placeholder = t.contactForm.placeholders.name;
-    if (inputEmail) inputEmail.placeholder = t.contactForm.placeholders.email;
-    if (inputTel) inputTel.placeholder = t.contactForm.placeholders.tel;
-    if (textarea) textarea.placeholder = t.contactForm.placeholders.message;
-    safeSetText("label[for='consent']", t.contactForm.consent);
-    safeSetText("#contact-form button[type='submit']", t.contactForm.submit);
-    
-    // Nová patička
-    safeSetText(".footer-col.footer-about p", t.footer.about);
-    safeSetText(".footer-col.footer-about h4", t.footer.techTitle);
-    safeSetText(".footer-col.footer-contact h4", t.footer.contactTitle);
-    
-    const footerContactP = document.querySelector(".footer-col.footer-contact p:nth-of-type(1)");
-    if(footerContactP) {
-      footerContactP.innerHTML = `
-        <strong>${t.companyInfo.nameLabel}</strong><br>
-        ${t.companyInfo.addressValue}<br>
-        ${t.companyInfo.icoValue}<br>
-        ${t.companyInfo.dicValue}
-      `;
-    }
-    const footerContactA = document.querySelector(".footer-col.footer-contact p:nth-of-type(2)");
-    if(footerContactA) {
-      footerContactA.innerHTML = `
-        <a href="mailto:${t.companyInfo.emailValue}">${t.companyInfo.emailValue}</a><br>
-        <a href="tel:${t.companyInfo.phoneValue}">${t.companyInfo.phoneValue}</a>
-      `;
-    }
-
-    safeSetText(".footer-bottom", `${t.footer.copyright} <a href="#">${t.footer.privacy}</a>`, true);
-
-    // toast
-    safeSetText("#toast", t.toast);
-
-    // aria labels
-    const navElement = document.querySelector("nav[aria-label]");
-    if (navElement) navElement.setAttribute("aria-label", lang === "cs" ? "Hlavní menu" : "Main menu");
-    
-    const filterBar = document.querySelector(".filter-bar");
-    if (filterBar) filterBar.setAttribute("aria-label", lang === "cs" ? "Filtry projektů" : "Project filters");
-
-    // header button text
-    langBtn.textContent = t.headerBtnText;
-  }
-
-  // inicializace (nastavit výchozí české texty)
-  applyLanguage(currentLang);
-
-  // přepínání
-  langBtn.addEventListener("click", () => {
-    document.body.classList.add("fade-out");
-    setTimeout(() => {
-      currentLang = currentLang === "cs" ? "en" : "cs";
-      applyLanguage(currentLang);
-      document.body.classList.remove("fade-out");
-      document.body.classList.add("fade-in");
-      setTimeout(() => {
-        document.body.classList.remove("fade-in");
-      }, 500);
-    }, 500);
-  });
-
-});
-
-})();
